@@ -1,0 +1,207 @@
+label {
+	cursor: pointer;
+}
+
+.form-item {
+	clear: both;
+	margin-bottom: 10px;
+}
+
+.form-item:before, .form-item:after { content: ""; display: table; }
+.form-item:after { clear: both; }
+
+.form-item br {
+	clear: both;
+}
+
+.form-item fieldset legend,
+.form-item label {
+	display: block;
+	float: left;
+	font: 14px/18px 'FrescoPro', sans-serif; 
+	width: 200px;
+	padding-top: 9px;
+	padding-right: 12px;
+	color: #555555;
+}
+
+.form-item fieldset legend > span,
+.form-item label > span {
+	color: #3399ff;
+	float: right;
+}
+
+.form-item input[type='password'],
+.form-item input[type='text'],
+.form-item select,
+.form-item textarea {
+	border: 1px solid #e8dabf;
+	border-radius: 3px; 
+	padding: 5px 8px;
+	display: inline-block;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.08), 0 0 5px rgba(0, 0, 0, 0.08);
+	font: 14px/14px 'FrescoPro-Sans', sans-serif; 
+	color: #aaa;
+}
+
+.form-item.HiddenXFormField,
+.form-item input[type='password'].HiddenXFormField,
+.form-item input[type='text'].HiddenXFormField,
+.form-item select.HiddenXFormField,
+.form-item textarea.HiddenXFormField {
+    display:none;
+}
+
+.form-item textarea {
+	height: 150px;
+}
+
+input[type='checkbox'], 
+input[type='radio'] {
+	margin-top: 10px;
+	margin-right: 10px;
+	display: block;
+	float: left;
+	opacity: 0;
+	cursor: pointer;
+}
+
+input[type='radio'] + span,
+input[type='checkbox'] + span,
+.form-item input[type='radio'] + label,
+.form-item input[type='checkbox'] + label {
+	width: auto;
+	position: relative;
+	cursor: pointer;
+}
+
+.product-filter input[type='radio'] + label {
+	position: relative;
+	cursor: pointer;
+	padding-left: 18px;
+}
+
+input[type='radio'] + span:before,
+.form-item input[type='radio'] + label:before,
+.product-filter input[type='radio'] + label:before {
+	content: "";
+	background: url("/gourmeta/wp-content/themes/gourmeta/img/spr-icons.png") no-repeat -100px -900px;
+	width: 12px;
+	height: 12px;
+	position: absolute;
+	top: 11px;
+	left: -18px;
+}
+
+.product-filter input[type='radio'] + label:before {
+	top: 2px;
+	left: 0;
+}
+
+/*.form-item input[type='radio'] + label:before,
+.form-item input[type='checkbox'] + label:before {
+	z-index: -1;
+}*/
+
+label input[type='radio'] + span:before {
+	left: 0;
+	top: 0;
+}
+
+input[type='radio']:checked + span:before,
+.product-filter input[type='radio']:checked + label:before,
+.form-item input[type='radio']:checked + label:before {
+	background-position: 0 -900px;
+}
+
+input[type='checkbox'] + span:before,
+.form-item input[type='checkbox'] + label:before {
+	content: "";
+	background: url("/gourmeta/wp-content/themes/gourmeta/img/spr-icons.png") no-repeat -100px -950px;
+	width: 17px;
+	height: 16px;
+	position: absolute;
+	top: 9px;
+	left: -20px;
+}
+
+input[type='checkbox']:checked + span:before,
+.form-item input[type='checkbox']:checked + label:before {
+	background-position: 0 -950px;
+}
+
+input[type='radio'] + span:before,
+input[type='checkbox'] + span:before {
+	top:-2px
+}
+
+input[type='checkbox'].disabled + span:before, 
+input[type='radio'].disabled + span:before {
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+	filter: alpha(opacity=50);
+	opacity: 0.5;
+}
+
+.form-item input[type='submit'],
+.btn-confirm input[type='submit'] {
+	position: relative;
+	display: inline-block;
+	min-width: 93px;
+	margin: 0 10px 6px 215px;
+	padding: 5px 8px;
+	border-radius: 3px;
+	cursor: pointer;
+	font: bold 12px/25px 'FrescoSansPro', sans-serif;
+	color: #fff;
+	text-align: center;
+	text-transform: uppercase;
+	text-decoration: none;
+
+	background: #8f4997;
+	background: -webkit-linear-gradient(top,  #8f4997 0%,#752f7d 100%);
+	background: -moz-linear-gradient(top,  #8f4997 0%,#752f7d 100%);
+	background: linear-gradient(top,  #8f4997 0%,#752f7d 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8f4997', endColorstr='#752f7d',GradientType=0 );
+}
+
+.form-item input[type='submit']:after,
+.btn-confirm input[type='submit']:after {
+	position: absolute;
+	top: 9px;
+	right: -3px;
+	width: 8px;
+	height: 10px;
+	border-radius: 50%;
+	background: #823c8a;
+	content: "";
+	z-index: -10;
+}
+
+.form-item input[type='submit']:hover {
+	color: #F4CE79;
+}
+
+.form-item hr {
+	margin: 36px 0;
+	background: url("/gourmeta/wp-content/themes/gourmeta/img/border-curved.png") no-repeat center top;
+	height: 8px;
+	border: none;
+}
+
+.form-item .xformvalidator {
+	margin-left: 10px;
+	background: url("/gourmeta/wp-content/themes/gourmeta/img/bg-error.png") no-repeat right center #e3000f;
+	font: 14px/18px 'FrescoPro', sans-serif; 
+	color: #fff !important;
+	padding: 5px 30px 5px 20px;
+}
+
+.form-item span.head {
+	color: #82348b;
+	font: 16px/21px 'FrescoPro', sans-serif; 
+}
+
+.form-item .field-list {
+	display: block;
+	float: left;
+}

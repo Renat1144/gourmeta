@@ -1,0 +1,234 @@
+/* Button hover animatie */
+
+@keyframes "btn-hover" {
+ 0% {
+	transform: translateY(0px);
+ }
+ 50% {
+	transform: translateY(19px);
+ }
+ 51% {
+	transform: translateY(-19px);
+ }
+ 100% {
+	transform: translateY(0px);
+ }
+
+}
+
+@-moz-keyframes btn-hover {
+ 0% {
+   -moz-transform: translateY(0px);
+   transform: translateY(0px);
+ }
+ 50% {
+   -moz-transform: translateY(19px);
+   transform: translateY(19px);
+ }
+ 51% {
+   -moz-transform: translateY(-19px);
+   transform: translateY(-19px);
+ }
+ 100% {
+   -moz-transform: translateY(0px);
+   transform: translateY(0px);
+ }
+
+}
+
+@-webkit-keyframes "btn-hover" {
+ 0% {
+   -webkit-transform: translateY(0px);
+   transform: translateY(0px);
+ }
+ 50% {
+   -webkit-transform: translateY(19px);
+   transform: translateY(19px);
+ }
+ 51% {
+   -webkit-transform: translateY(-19px);
+   transform: translateY(-19px);
+ }
+ 100% {
+   -webkit-transform: translateY(0px);
+   transform: translateY(0px);
+ }
+
+}
+
+@-ms-keyframes "btn-hover" {
+ 0% {
+   -ms-transform: translateY(0px);
+   transform: translateY(0px);
+ }
+ 50% {
+   -ms-transform: translateY(19px);
+   transform: translateY(19px);
+ }
+ 51% {
+   -ms-transform: translateY(-19px);
+   transform: translateY(-19px);
+ }
+ 100% {
+   -ms-transform: translateY(0px);
+   transform: translateY(0px);
+ }
+
+}
+
+@-o-keyframes "btn-hover" {
+ 0% {
+   -o-transform: translateY(0px);
+   transform: translateY(0px);
+ }
+ 50% {
+   -o-transform: translateY(19px);
+   transform: translateY(19px);
+ }
+ 51% {
+   -o-transform: translateY(-19px);
+   transform: translateY(-19px);
+ }
+ 100% {
+   -o-transform: translateY(0px);
+   transform: translateY(0px);
+ }
+
+}
+
+/* call animatie */
+
+@keyframes "call-hover" {
+ 0% {
+    -webkit-transform: translateY(0px);
+      -moz-transform: translateY(0px);
+      -o-transform: translateY(0px);
+      -ms-transform: translateY(0px);
+      transform: translateY(0px);
+ }
+ 100% {
+    -webkit-transform: translateY(-4px);
+      -moz-transform: translateY(-4px);
+      -o-transform: translateY(-4px);
+      -ms-transform: translateY(-4px);
+      transform: translateY(-4px);
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+ }
+
+}
+
+@-moz-keyframes call-hover {
+ 0% {
+   -moz-transform: translateY(0px);
+   transform: translateY(0px);
+ }
+ 100% {
+   -moz-transform: translateY(-4px);
+   transform: translateY(-4px);
+   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+ }
+
+}
+
+@-webkit-keyframes "call-hover" {
+ 0% {
+   -webkit-transform: translateY(0px);
+   transform: translateY(0px);
+ }
+ 100% {
+   -webkit-transform: translateY(-4px);
+   transform: translateY(-4px);
+   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+ }
+
+}
+
+@-ms-keyframes "call-hover" {
+ 0% {
+   -ms-transform: translateY(0px);
+   transform: translateY(0px);
+ }
+ 100% {
+   -ms-transform: translateY(-4px);
+   transform: translateY(-4px);
+   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+ }
+
+}
+
+@-o-keyframes "call-hover" {
+ 0% {
+   -o-transform: translateY(0px);
+   transform: translateY(0px);
+ }
+ 100% {
+   -o-transform: translateY(-4px);
+   transform: translateY(-4px);
+   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+ }
+
+}
+
+
+
+
+
+/* plus animatie */
+
+@keyframes "plus-hover" {
+ 0% {
+   transform: rotate(0deg);
+ }
+ 100% {
+   transform: rotate(-90deg);
+ }
+
+}
+
+@-moz-keyframes plus-hover {
+ 0% {
+   -moz-transform: rotate(0deg);
+   transform: rotate(0deg);
+ }
+ 100% {
+   -moz-transform: rotate(-90deg);
+   transform: rotate(-90deg);
+ }
+
+}
+
+@-webkit-keyframes "plus-hover" {
+ 0% {
+   -webkit-transform: rotate(0deg);
+   transform: rotate(0deg);
+ }
+ 100% {
+   -webkit-transform: rotate(-90deg);
+   transform: rotate(-90deg);
+ }
+
+}
+
+@-ms-keyframes "plus-hover" {
+ 0% {
+   -ms-transform: rotate(0deg);
+   transform: rotate(0deg);
+ }
+ 100% {
+   -ms-transform: rotate(-90deg);
+   transform: rotate(-90deg);
+ }
+
+}
+
+@-o-keyframes "plus-hover" {
+ 0% {
+   -o-transform: rotate(0deg);
+   transform: rotate(0deg);
+ }
+ 100% {
+   -o-transform: rotate(-90deg);
+   transform: rotate(-90deg);
+ }
+
+}
