@@ -1,0 +1,21 @@
+User-agent: Yandex
+Disallow: /wp-admin/
+Disallow: /*_openstat
+Disallow: /*from=adwords
+Disallow: /*gclid=
+Disallow: /*yclid=
+Disallow: /*utm_source=
+Disallow: /?p=
+Disallow: /ru/quote/?dispensers=
+Host: gourmeta.ru
+
+User-agent: *
+Disallow: /wp-admin/
+Disallow: /*_openstat
+Disallow: /*from=adwords
+Disallow: /*gclid=
+Disallow: /*yclid=
+Disallow: /*utm_source=
+Disallow: /?p=
+Disallow: /ru/quote/?dispensers=
+Sitemap: http://gourmeta.ru/sitemap_index.xml

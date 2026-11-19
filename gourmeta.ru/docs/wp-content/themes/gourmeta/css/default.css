@@ -1,0 +1,202 @@
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+html {
+	-webkit-text-size-adjust: 100%; 
+	-ms-text-size-adjust: 100%;
+	overflow-y: scroll;
+}
+
+body {
+	background: #fff;
+	font: 12px/18px Arial, sans-serif;
+	color: #666;
+	-webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
+	-webkit-text-size-adjust: 100%;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, audio, canvas, video {
+	display: block; 
+}
+
+@font-face {
+	font-family: 'FrescoPro';
+	src: url('../fonts/frescopro-normal-webfont.eot');
+	src: url('../fonts/frescopro-normal-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/frescopro-normal-webfont.woff') format('woff'),
+		 url('../fonts/frescopro-normal-webfont.ttf') format('truetype'),
+		 url('../fonts/frescopro-normal-webfont.svg#FrescoProNormalRegular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'FrescoPro';
+	src: url('../fonts/frescopro-bold-webfont.eot');
+	src: url('../fonts/frescopro-bold-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/frescopro-bold-webfont.woff') format('woff'),
+		 url('../fonts/frescopro-bold-webfont.ttf') format('truetype'),
+		 url('../fonts/frescopro-bold-webfont.svg#../fonts/frescoProBoldRegular') format('svg');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'FrescoPro-italic';
+	src: url('../fonts/frescopro-lightitalic-webfont.eot');
+	src: url('../fonts/frescopro-lightitalic-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/frescopro-lightitalic-webfont.woff') format('woff'),
+		 url('../fonts/frescopro-lightitalic-webfont.ttf') format('truetype'),
+		 url('../fonts/frescopro-lightitalic-webfont.svg#frescopro-lightitalic') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'FrescoPro-Sans';
+	src: url('../fonts/frescosanspro-normal-webfont.eot');
+	src: url('../fonts/frescosanspro-normal-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/frescosanspro-normal-webfont.woff') format('woff'),
+		 url('../fonts/frescosanspro-normal-webfont.ttf') format('truetype'),
+		 url('../fonts/frescosanspro-normal-webfont.svg#FrescoSansProNormalRegular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'FrescoPro-Sans';
+	src: url('../fonts/frescosanspro-bold-webfont.eot');
+	src: url('../fonts/frescosanspro-bold-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/frescosanspro-bold-webfont.woff') format('woff'),
+		 url('../fonts/frescosanspro-bold-webfont.ttf') format('truetype'),
+		 url('../fonts/frescosanspro-bold-webfont.svg#FrescoSansProBoldRegular') format('svg');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'FrescoPro-Black';
+	src: url('../fonts/frescosanspro-black-webfont.eot');
+	src: url('../fonts/frescosanspro-black-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/frescosanspro-black-webfont.woff') format('woff'),
+		 url('../fonts/frescosanspro-black-webfont.ttf') format('truetype'),
+		 url('../fonts/frescosanspro-black-webfont.svg#FrescoSansProBlack') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Journal';
+	src: url('../fonts/journal-webfont.eot');
+	src: url('../fonts/journal-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/journal-webfont.woff') format('woff'),
+		 url('../fonts/journal-webfont.ttf') format('truetype'),
+		 url('../fonts/journal-webfont.svg#Journal') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal; 
+}
+
+h1 { font: 38px/50px 'FrescoPro-Sans', sans-serif; margin-bottom: 14px; color: #ec6602;}
+h2 { font: 24px/34px 'FrescoPro-Sans', sans-serif; margin-bottom: 10px; color: #82348b; }
+h3 { font: bold 16px/24px 'FrescoPro-Sans', sans-serif; margin-bottom: 10px; color: #3d0903; }
+h4 { font-size: 16px; line-height: 30px; margin-bottom: 4px; }
+h5 { font-size: 15px; line-height: 24px; }
+h6 { font-size: 14px; line-height: 21px; }
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a { font-weight: inherit; color: inherit;}
+
+p { margin: 0 0 20px 0; }
+p img { margin: 0; }
+
+a { color: #0076C0; text-decoration: none;}
+a:hover { text-decoration: underline; cursor: pointer}
+a:focus { outline: none; }
+a:hover, a:active { outline: 0; }
+
+::-moz-selection { background: #eec56e; color: #fff; text-shadow: none; }
+::selection { background: #eec56e; color: #fff; text-shadow: none; }
+
+
+blockquote, q {
+	quotes: none; 
+}
+
+blockquote p:before, 
+q:before {
+	content: '\201C';
+}
+
+blockquote p:after, 
+q:after {
+	content: '\201D';
+}
+
+pre { 
+	white-space: pre; 
+	white-space: pre-wrap;
+	word-wrap: break-word; 
+}
+
+b, strong { font-weight: bold; }
+em { font-family: 'FrescoPro-italic', sans-serif; }
+small { font-size: 80%; }
+
+sub, sup { 
+	font-size: 75%; 
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+
+ul, ol { 
+	margin: 1em 0; 
+	padding: 0 0 0 40px;
+	list-style-image: url(../img/bullet.png);
+}
+
+img { 
+	border: 0; 
+	-ms-interpolation-mode: bicubic; 
+	vertical-align: middle; 
+}
+
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0; 
+	width: 100%;
+	margin: 0 0 30px;
+}
+
+table th,
+table td {
+	padding: 1em;
+	vertical-align: top;
+	text-align: left;
+	border-bottom: none;
+}
+
+table th {
+	margin-bottom: 10px;
+	font: bold 14px/20px 'FrescoPro-Sans', sans-serif; 
+	color: #3d0903;
+}
+
+hr { 
+	border: solid #e8dabf; 
+	border-width: 1px 0 0; 
+	clear: both; 
+	margin: 10px 0 30px; 
+	height: 0; 
+}

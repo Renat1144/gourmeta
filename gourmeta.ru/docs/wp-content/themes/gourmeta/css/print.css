@@ -1,0 +1,36 @@
+﻿.nav.tabs,
+.nav-main-wrapper,
+.breadcrumb-wrapper,
+.footer-wrapper,
+.footermeta-wrapper,
+.rating {
+	display: none !important;
+}
+
+.header-shadow,
+.header ul.nav,
+.header .search,
+.header .header-title,
+.pushbox {
+	display: none !important;
+}
+
+
+/* Buttons & Links */
+
+.button,
+.button.button-yellow,
+.readmore,
+.return,
+ul.faq-teaser,
+.row.full-image {
+	display: none !important;
+}
+
+
+/* Extranet */
+
+.extranet .col.col-2of6 {
+	width: 200px !important;
+}
+

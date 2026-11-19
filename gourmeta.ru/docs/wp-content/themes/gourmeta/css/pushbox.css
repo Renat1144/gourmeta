@@ -1,0 +1,298 @@
+.pushbox {
+	height: 475px;
+	position: relative;
+}
+
+.pushbox .pushbox-viewport {
+	height: 475px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    z-index: 10;
+}
+
+.pushbox ul.pushbox-slides {
+	display: block;
+	overflow: hidden;
+    height: 100%;
+	width: 100%;
+}
+
+.pushbox ul.pushbox-slides li {
+	list-style: none;
+	position: absolute;
+	left: 50%;   
+	top: 0;
+	display: block;
+	width: 1260px;
+	height: 100%;   
+	margin-left: -630px;
+	overflow: hidden;
+}
+
+.pushbox ul.pushbox-slides li .text-box {
+	position: absolute;
+	z-index: 10;
+	width: 475px;
+	top: 90px;
+	left: 50%;
+	margin-left: -414px;
+}
+
+.pushbox ul.pushbox-slides li h3 {
+	color: #fff;
+	font: bold 36px/42px 'FrescoPro', sans-serif;
+	text-shadow: rgba(0,0,0,0.15) 2px 2px 2px;
+	margin-bottom: 50px;
+}
+
+.pushbox ul.pushbox-slides li a.button {
+	margin-right: 10px;
+}
+
+.pushbox ul.pushbox-slides li img,
+.pushbox ul.pushbox-slides li .video {
+	position: absolute;
+	z-index: 0;
+}
+
+.pushbox ul.pushbox-slides li .mediaplayer-wrapper a {
+	cursor: default;
+}
+
+.pushbox ul.pushbox-slides li .mediaplayer-wrapper.playing {
+	padding-left: 216px;
+	padding-top: 40px;
+}
+
+.pushbox ul.pushbox-slides li .video {
+	width: 1260px;
+	height: 474px;
+}
+
+.pushbox .pushbox-nav {
+	margin: -35px auto 0 auto;
+	text-align: center;
+	position: relative;
+	z-index: 20;
+}
+
+.pushbox .pushbox-nav ul {
+	display: inline-block;
+}
+
+.pushbox .pushbox-nav ul li {
+	display: inline-block;
+	margin: 0 5px;
+	padding: 0;
+	background: #fff;
+	width: 6px;
+	height: 6px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px; 
+	text-indent: -9999em;
+	cursor: pointer;
+}
+
+.pushbox .pushbox-nav ul li.active {
+	background: #82348b;
+}
+
+.pushbox .pushbox-next,
+.pushbox .pushbox-prev {
+	position: absolute;
+	top: 406px;
+	left: 50%;
+	margin-top: 10px;
+	margin-left: -485px;
+	z-index: 90;
+	display: block;
+	width: 15px;
+	height: 40px;
+	background: url(../img/spr-icons.png) no-repeat 0 -1050px;
+	text-indent: -9999em;
+
+	-webkit-transition: margin 0.2s ease-out;
+	transition        : margin 0.2s ease-out;
+}
+
+.pushbox .pushbox-prev:hover {
+	background-position: 0 -1100px;
+	margin-left: -488px;
+}
+
+.pushbox .pushbox-next {
+	background-position: -100px -1050px;
+	margin-left: 470px;
+}
+
+.pushbox .pushbox-next:hover {
+	background-position: -100px -1100px;
+	margin-left: 473px;
+}
+
+.pushbox .pushbox-teasers {
+	margin: -5px auto 0 auto;
+    padding: 0 18px;
+    width: 864px;
+	overflow: hidden;
+	position: relative;
+	z-index: 20;
+	background-color: rgba(254, 254, 254, 0.9);
+}
+
+.pushbox .pushbox-teasers + .pushbox-teasers-shadow {
+	background: url(../img/bg-pushbox-shadow.png) no-repeat center top;
+	width: 1260px;
+	height: 102px;
+	margin-top: -85px;
+	opacity: 0.3;
+}
+
+.pushbox .pushbox-teasers .pushbox-teasers-box {
+	width: 5000px;
+}
+
+.pushbox .pushbox-teasers .slide-teasers {
+	float: left;
+	width: 864px;
+	padding: 0 18px;
+}
+
+.pushbox .pushbox-teasers .slide-teaser {
+	width: 252px;
+	float: left;
+	margin-left: 18px;
+	padding-left: 17px;	
+}
+
+.pushbox .pushbox-teasers .slide-teaser a {
+	cursor: pointer;
+	display: block;
+}
+
+.pushbox .pushbox-teasers .slide-teaser a p {
+	color: #595959;
+}
+
+.pushbox .pushbox-teasers .slide-teaser a:hover {
+	text-decoration: none;
+}
+
+.pushbox .pushbox-teasers .slide-teasers .slide-teaser:first-child {
+	margin-left: 0;
+	padding-left: 0;	
+}
+
+.pushbox .pushbox-teasers .col {
+	position: relative;
+	padding: 8px 0 8px 107px;
+	width: 145px;
+	float: none;
+	margin: 18px 0;
+	border-left: 1px solid #e8dabf;
+}
+
+.pushbox .pushbox-teasers .slide-teasers .slide-teaser:first-child .col {
+	border-left: 0;
+}
+
+.pushbox .pushbox-teasers .slide-teaser a {
+	position: relative;
+	color: #666;
+}
+
+.pushbox .pushbox-teasers .slide-teaser a h3,
+.pushbox .pushbox-teasers .slide-teaser a p,
+.pushbox .pushbox-teasers .slide-teaser a div {
+	position: relative;
+	z-index: 10;
+	color: #666;
+}
+
+.pushbox .pushbox-teasers .slide-teaser a h3 {
+	color: #3d0903;
+}
+
+.pushbox .pushbox-teasers .slide-teaser a span {
+	z-index: 5;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.pushbox .pushbox-teasers .slide-teaser a:hover p,
+.pushbox .pushbox-teasers .slide-teaser a:hover div {
+	color: #fff;
+}
+
+.pushbox .pushbox-teasers .slide-teaser a:hover span {
+	background: #f4ce7a;
+	background: -webkit-linear-gradient(top, #f4ce7a 0%,#e2b657 100%);
+	background: -moz-linear-gradient(top, #f4ce7a 0%,#e2b657 100%);
+	background: linear-gradient(to bottom, #f4ce7a 0%,#e2b657 100%);
+	border-radius: 5px; 
+}	
+
+.pushbox .pushbox-teasers img {
+	position: absolute;
+	top: 18px;
+	left: 18px;
+	z-index: 10;
+}
+
+.pushbox .pushbox-teasers h3, 
+.pushbox .pushbox-teasers p {
+	width: 125px;
+}
+
+.pushbox .pushbox-teasers p {
+	margin-bottom: 0;
+}
+
+.pushbox .call-to-action {
+	width: 400px;
+	position: absolute;
+	bottom: 100px;
+	left: 50%;
+	z-index: 500;
+	margin-left: -410px;
+}
+
+.pushbox .call-to-action .call-button-holder .button {
+	margin: 0;
+}
+
+.pushbox .call-to-action,
+.pushbox .call-to-action em,
+.pushbox .call-to-action .call-link {
+	color: #fff;
+}
+
+.pushbox .call-to-action em {
+	margin-bottom: 12px;
+}
+
+.pushbox .call-button-holder {
+	float: left;
+}
+
+.pushbox-landing .pushbox-nav {
+	margin-top: -130px;
+}
+
+.pushbox-landing .call-to-action {
+	bottom: 150px;
+}
+
+.pushbox-overlay {
+	background: url(../img/pushbox-gradient.png) repeat-x;
+	width: 100%;
+	height: 165px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	z-index: 15;
+}

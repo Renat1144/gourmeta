@@ -1,0 +1,75 @@
+name: gourmeta-local
+
+x-wordpress-environment: &wordpress-environment
+  GOURMETA_LOCAL_URL: http://127.0.0.1:8187
+
+services:
+  db:
+    image: mariadb:11.4
+    environment:
+      MARIADB_DATABASE: gourmeta
+      MARIADB_USER: gourmeta
+      MARIADB_PASSWORD_FILE: /run/secrets/db_password
+      MARIADB_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+      MARIADB_ROOT_HOST: localhost
+    secrets: [db_password, db_root_password]
+    volumes:
+      - database:/var/lib/mysql
+      - ./local/database:/docker-entrypoint-initdb.d
+      - ./local/export-db.sh:/usr/local/bin/gourmeta-export-db:ro
+    healthcheck:
+      test: [CMD, healthcheck.sh, --connect, --innodb_initialized]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+      start_period: 10s
+
+  web:
+    image: wordpress:php8.3-apache
+    entrypoint: [apache2-foreground]
+    command: []
+    environment: *wordpress-environment
+    secrets: [db_password, wp_salt]
+    volumes:
+      - ./gourmeta.ru/docs:/var/www/html
+      - ./local/apache.conf:/etc/apache2/sites-enabled/000-default.conf:ro
+      - ./local/php.ini:/usr/local/etc/php/conf.d/gourmeta-local.ini:ro
+    ports:
+      - 127.0.0.1:8187:80
+    depends_on:
+      db:
+        condition: service_healthy
+
+  cli:
+    image: wordpress:cli-php8.3
+    working_dir: /var/www/html
+    environment: *wordpress-environment
+    secrets: [db_password, wp_salt]
+    volumes:
+      - ./gourmeta.ru/docs:/var/www/html
+    profiles: [tools]
+    depends_on:
+      db:
+        condition: service_healthy
+
+  prepare:
+    image: wordpress:cli-php8.3
+    user: "0:0"
+    working_dir: /workspace
+    entrypoint: [sh, local/prepare.sh]
+    command: []
+    network_mode: none
+    volumes:
+      - ./:/workspace
+    profiles: [tools]
+
+secrets:
+  db_password:
+    file: ./local/secrets/db-password
+  db_root_password:
+    file: ./local/secrets/db-root-password
+  wp_salt:
+    file: ./local/secrets/wp-salt
+
+volumes:
+  database:

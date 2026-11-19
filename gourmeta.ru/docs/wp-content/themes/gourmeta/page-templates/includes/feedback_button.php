@@ -1,0 +1,1 @@
+<a href="<?= makeLangURL('/%/feedback/') ?>" class="button button-yellow"><?= langS('Заполните форму', 'Call me back') ?> <span><span></span></span></a>

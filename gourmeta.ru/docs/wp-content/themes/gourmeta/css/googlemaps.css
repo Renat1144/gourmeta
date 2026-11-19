@@ -1,0 +1,22 @@
+﻿#map-canvas {
+	width: 900px;
+	height: 460px;
+	border: 1px solid #e8dabf;
+    border-radius: 5px;
+}
+
+.map-info {
+	background: #fff;
+	border: 1px solid #e8dabf;
+	width: 225px;
+	padding: 36px;
+    border-radius: 5px;
+}
+
+.map-info h3 {
+	color: #82358c;
+}
+
+.map-info div {
+	margin-bottom: 18px;
+}
