@@ -1,0 +1,151 @@
+.editor-styles-wrapper {
+	padding: 0 !important;
+	overflow-wrap: normal;
+}
+
+.gourmeta-visual-layout .editor-visual-editor__post-title-wrapper {
+	display: none;
+}
+
+.gourmeta-visual-layout .is-root-container {
+	margin: 0;
+	padding: 0;
+	max-width: none;
+}
+
+.gourmeta-visual-layout .is-root-container > .wp-block {
+	max-width: none;
+}
+
+.gourmeta-visual-layout .is-root-container > .wp-block.col-wrapper:not(.label-green):not(.col-wrapper-grey) {
+	max-width: none;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.gourmeta-visual-layout .block-editor-block-list__layout :where(.wp-block:not(.call-to-action)) {
+	box-sizing: content-box;
+}
+
+.gourmeta-editor-header,
+.gourmeta-editor-footer {
+	position: relative;
+}
+
+.gourmeta-chrome-actions {
+	position: absolute;
+	z-index: 400;
+	top: 8px;
+	right: 12px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+}
+
+.gourmeta-chrome-actions button,
+.gourmeta-add-slide-image button {
+	background: #fff;
+}
+
+.gourmeta-dynamic-preview {
+	position: relative;
+	min-height: 24px;
+}
+
+.gourmeta-dynamic-preview .gourmeta-static-preview,
+.gourmeta-editor-header .gourmeta-static-preview,
+.gourmeta-editor-footer .gourmeta-static-preview {
+	pointer-events: none;
+}
+
+.gourmeta-editor-home .breadcrumb-wrapper {
+	position: relative;
+	z-index: 150;
+}
+
+.gourmeta-edit-slider ul.pushbox-slides > li {
+	display: none;
+}
+
+.gourmeta-edit-slider ul.pushbox-slides > li:first-child,
+.gourmeta-edit-slider ul.pushbox-slides > li.is-selected,
+.gourmeta-edit-slider ul.pushbox-slides > li.has-child-selected {
+	display: block;
+}
+
+.gourmeta-edit-slider:has(ul.pushbox-slides > li.is-selected, ul.pushbox-slides > li.has-child-selected) ul.pushbox-slides > li:first-child:not(.is-selected, .has-child-selected) {
+	display: none;
+}
+
+.gourmeta-edit-slider .pushbox-nav ul li button {
+	display: block;
+	width: 14px;
+	height: 14px;
+	margin: -4px;
+	background: transparent;
+	cursor: pointer;
+}
+
+.gourmeta-add-slide-image {
+	position: absolute;
+	left: calc(50% - 414px);
+	top: 75%;
+	z-index: 12;
+}
+
+.gourmeta-edit-slider .pushbox-slides > li.wp-block {
+	position: absolute;
+	left: 50%;
+	top: 0;
+	width: 1260px;
+	max-width: none;
+	height: 100%;
+	margin: 0 0 0 -630px;
+}
+
+.call-to-action .gourmeta-edit-button-label {
+	display: inline;
+	position: static;
+	font: inherit;
+	color: inherit;
+	background: none;
+	padding: 0;
+}
+
+.gourmeta-edit-slider .text-box h3 {
+	margin-block-start: 0;
+}
+
+.gourmeta-edit-slider ul.pushbox-slides {
+	margin-block: 0;
+}
+
+.gourmeta-visual-layout .teasers-related :is(a, img, h3) {
+	margin-block-start: 0;
+}
+
+.gourmeta-visual-layout .teasers-related :is(a, img) {
+	margin-block-end: 0;
+}
+
+.gourmeta-visual-layout .teasers-related li h3 {
+	position: absolute;
+	margin-inline: 0;
+}
+
+.gourmeta-visual-layout .teasers-related li p {
+	min-height: 72px;
+}
+
+.gourmeta-editor-footer .footer-inner h3 {
+	margin-block-start: 0;
+}
+
+.gourmeta-visual-layout .is-root-container > .gourmeta-edit-slider {
+	max-width: 1260px;
+	margin-inline: auto;
+}
+
+.gourmeta-visual-layout .wp-block-gourmeta-section.col {
+	margin-inline: 18px;
+}

@@ -108,6 +108,9 @@
 		{
 			$url .= $part.'/';
 			$page = get_page_by_path($url);
+			if ( ! $page || 'publish' !== $page->post_status ) {
+				continue;
+			}
 			$crumbs[] = array(
 				'title' => $page->post_title,
 				'url' => get_permalink($page->ID)
@@ -164,3 +167,4 @@
 	include_once 'includes/wp-lang.php';
 	include_once 'includes/wp-clear.php';
 ?>
+<?php require_once __DIR__ . '/visual/blocks.php'; ?>

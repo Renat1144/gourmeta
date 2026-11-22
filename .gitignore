@@ -1,5 +1,6 @@
 /local/database/
 /local/secrets/
+/local/backups/
 /references/
 /gourmeta.ru/docs/wp-config.php
 /gourmeta.ru/docs/google*.html

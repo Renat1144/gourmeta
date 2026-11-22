@@ -79,6 +79,10 @@
 	// Для текущей страницы возвращает идентификатор текущего языка
 	function getLangID()
 	{
+        global $gourmeta_preview_language;
+        if ( $gourmeta_preview_language ) {
+            return $gourmeta_preview_language;
+        }
 		$uri = $_SERVER["REQUEST_URI"];
 		
 		// по умолчанию считаем русский язык
@@ -124,10 +128,19 @@ return 'ru';
             return '<a href="/en'.$uri.'" class="language en">in english</a>';
 	}
 	
+function gourmeta_uses_english_navigation() {
+	if ( 'en' !== getLangID() ) {
+		return false;
+	}
+
+	$english_home = get_page_by_path( 'en' );
+	return $english_home && 'publish' === $english_home->post_status;
+}
+
 	// Для текущей страницы возвращает название верхнего меню
 	function getLangTopMenuName()
 	{
-		if (getLangID() == 'ru')
+		if (! gourmeta_uses_english_navigation())
 			return 'Верхнее меню';
 		else
 			return 'Top menu';
@@ -136,7 +149,7 @@ return 'ru';
 	// Для текущей страницы возвращает название главного меню
 	function getLangMainMenuName()
 	{
-		if (getLangID() == 'ru')
+		if (! gourmeta_uses_english_navigation())
 			return 'Главное меню';
 		else
 			return 'Main menu';
@@ -154,7 +167,7 @@ return 'ru';
 	// Для текущей страницы возвращает название нижнего меню
 	function getLangBottomMenuName()
 	{
-		if (getLangID() == 'ru')
+		if (! gourmeta_uses_english_navigation())
 			return 'Нижнее меню';
 		else
 			return 'Bottom menu';
@@ -163,9 +176,41 @@ return 'ru';
 	// Для текущей страницы возвращает домашнюю страницу
 	function getHomeLink()
 	{
-		if (getLangID() == 'ru')
+		if (! gourmeta_uses_english_navigation())
 			return '/ru/';
 		else
 			return '/en/';
 	}
+
+// Keep old links working while the English pages are in the trash.
+add_action( 'template_redirect', static function () {
+	if ( ! is_404() || ! in_array( $_SERVER['REQUEST_METHOD'] ?? 'GET', [ 'GET', 'HEAD' ], true ) ) {
+		return;
+	}
+
+	$path = untrailingslashit( (string) wp_parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH ) );
+	$replacements = [
+		'/en'            => '/',
+		'/en/about'      => '/ru/about/',
+		'/en/contacts'   => '/ru/contacts/',
+		'/en/dispensers' => '/ru/equipment/',
+		'/en/feedback'   => '/ru/feedback/',
+		'/en/quote'      => '/ru/quote/',
+	];
+
+	if ( ! isset( $replacements[ $path ] ) ) {
+		return;
+	}
+
+	$destination = home_url( $replacements[ $path ] );
+	$dispensers = $_GET['dispensers'] ?? '';
+	if ( '/en/quote' === $path && is_string( $dispensers ) && preg_match( '/^\d+(?:,\d+)*$/D', $dispensers ) ) {
+		$destination = add_query_arg( 'dispensers', $dispensers, $destination );
+	}
+
+	if ( wp_safe_redirect( $destination, 302 ) ) {
+		exit;
+	}
+}, 5 );
+
 ?>
