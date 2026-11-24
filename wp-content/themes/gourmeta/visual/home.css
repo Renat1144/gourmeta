@@ -310,6 +310,42 @@
 	font: 570 .8rem/1.5 var(--gh-font);
 }
 
+.gh-home-partners {
+	padding-bottom: clamp(58px, 7.15vw, 110px);
+	text-align: center;
+}
+
+.gh-home-partners .gh-heading {
+	margin-bottom: clamp(18px, 2.5vw, 34px);
+}
+
+:is(.gh-home-partners, .gh-about-partners) .gh-about-partner-names {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0.45em 1.25em;
+	max-width: 46rem;
+	margin: 0 auto clamp(18px, 3vw, 32px);
+	padding: 0;
+	list-style: none;
+	color: var(--gh-ink);
+	font-size: clamp(.9375rem, 1.5vw, 1.0625rem);
+	font-weight: 600;
+	line-height: 1.5;
+}
+
+:is(.gh-home-partners, .gh-about-partners) .gh-about-partner-names li {
+	margin: 0;
+	padding: 0;
+}
+
+:is(.gh-home-partners, .gh-about-partners) .gourmeta-image-zoom {
+	box-sizing: border-box;
+	width: min(100%, 60rem);
+	padding-bottom: clamp(42px, 4vw, 58px);
+	background: var(--gh-paper);
+}
+
 .gh-footer {
 	position: relative;
 	isolation: isolate;
