@@ -5,6 +5,7 @@
 		<!-- specific classes can be set on the row -->
 		<div class="row search">
 			<div class="col col-6of6">
+				<h1><?= langS('Результаты поиска', 'Search results') ?></h1>
 				<p class="search-summary"><?= langS('Вы искали', 'You searched for') ?> <strong>'<?= get_search_query() ?>'</strong></p>
 				<? if (have_posts()) : ?>
 					<ul>

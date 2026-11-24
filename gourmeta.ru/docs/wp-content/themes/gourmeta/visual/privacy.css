@@ -1,0 +1,144 @@
+.gh-privacy-links {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.gh-footer .gh-privacy-links a {
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	min-height: 44px;
+	max-width: 100%;
+	padding-block: 5px;
+	color: var(--gh-paper);
+	font: 650 clamp(1rem, 1.22vw, 1.09375rem)/1.35 var(--gh-font);
+}
+
+.gh-footer .gh-privacy-links a:is(:hover, :focus-visible) {
+	color: var(--gh-accent);
+	text-decoration: underline;
+	text-underline-offset: .2em;
+}
+
+.gh-cookie-panel[hidden],
+.gh-map-placeholder[hidden] {
+	display: none;
+}
+
+.gh-cookie-panel,
+.gh-privacy-map {
+	box-sizing: border-box;
+	border: 1px solid var(--gh-line-on-light);
+	border-radius: 18px;
+	background: var(--gh-paper);
+	color: var(--gh-ink);
+}
+
+.gh-cookie-panel {
+	position: fixed;
+	inset-inline-start: var(--gh-edge);
+	inset-block-end: max(18px, env(safe-area-inset-bottom));
+	z-index: 550;
+	width: min(calc(100% - 2 * var(--gh-edge)), 30rem);
+	padding: clamp(16px, 3vw, 24px);
+	box-shadow: 0 14px 44px #211c1929;
+	font: 500 .875rem/1.55 var(--gh-font);
+}
+
+.gh-cookie-copy h2 {
+	margin: 0 0 6px;
+	color: var(--gh-ink);
+	font: 750 1.15rem/1.3 var(--gh-font);
+}
+
+.gh-cookie-copy p { margin: 0 0 8px; }
+.gh-cookie-copy a,
+.gourmeta-inner-page .gh-form-privacy a {
+	color: var(--gh-ink);
+	text-decoration: underline;
+	text-underline-offset: .2em;
+}
+
+.gh-cookie-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 16px;
+}
+
+.gh-cookie-actions button,
+.gh-map-placeholder button {
+	box-sizing: border-box;
+	min-height: 44px;
+	padding: 8px 13px;
+	border: 1px solid var(--gh-line-on-light);
+	border-radius: 10px;
+	background: var(--gh-accent);
+	color: var(--gh-ink);
+	font: 720 .8125rem/1.35 var(--gh-font);
+	cursor: pointer;
+}
+
+.gh-cookie-actions button:hover,
+.gh-map-placeholder button:hover { background: var(--gh-sand); }
+
+.gh-cookie-actions button[aria-pressed="true"] {
+	border-color: #826246;
+	box-shadow: inset 0 0 0 1px #826246;
+}
+
+.gh-cookie-panel :is(a, button):focus-visible,
+.gh-map-placeholder button:focus-visible {
+	outline: 2px solid #826246;
+	outline-offset: 3px;
+}
+
+.gh-privacy-map {
+	width: min(100%, var(--gh-map-width));
+	overflow: hidden;
+}
+
+.gh-map-placeholder {
+	display: grid;
+	align-content: center;
+	justify-items: center;
+	min-height: min(var(--gh-map-height), 360px);
+	padding: clamp(12px, 3vw, 25px);
+	text-align: center;
+}
+
+.gh-map-placeholder p {
+	max-width: 30ch;
+}
+
+.gh-privacy-map > iframe {
+	width: 100%;
+	border: 0;
+}
+
+.gourmeta-inner-page .col-wrapper .gh-form-privacy label {
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
+	font-weight: 570;
+	line-height: 1.45;
+}
+
+.gourmeta-inner-page .col-wrapper .gh-form-privacy .wpcf7-list-item { margin: 0; }
+
+.gourmeta-inner-page .col-wrapper .gh-form-privacy input[type="checkbox"] {
+	flex: none;
+	margin: .19em 0 0;
+}
+
+.gourmeta-inner-page .col-wrapper .gh-form-privacy p { margin: 8px 0; }
+
+@media (max-width: 620px) {
+	.gh-cookie-actions button { flex: 1 1 100%; }
+	.gh-map-placeholder { min-height: 220px; }
+}
+
+@media print {
+	.gh-cookie-panel { display: none; }
+}

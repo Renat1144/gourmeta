@@ -9,8 +9,15 @@
 		-->
 		<div class="row">
 			<div class="col col6of6">
+				<?php if ( is_category() ) : ?>
+					<h1><?php single_cat_title(); ?></h1>
+				<?php endif; ?>
 				<? while (have_posts()) : the_post(); ?>
-					<h1><? the_title(); ?></h1>
+					<?php if ( is_category() ) : ?>
+						<h2><?php the_title(); ?></h2>
+					<?php else : ?>
+						<h1><?php the_title(); ?></h1>
+					<?php endif; ?>
 					<? the_content(); ?>
 				<? endwhile; // end of the loop. ?>
 			</div>

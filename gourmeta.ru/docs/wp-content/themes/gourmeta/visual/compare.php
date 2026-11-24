@@ -32,7 +32,8 @@
         }
     }
 
-	$backURL = get_permalink( get_queried_object_id() );
+	$compareURL = get_permalink( get_queried_object_id() );
+	$backURL = $compareURL;
 	$comparePos = strpos($backURL, '/compare/');
 
 	$backURL = substr($backURL, 0, $comparePos + 1).gourmeta_compare_query($correctedIDs);
@@ -52,7 +53,7 @@
 
 	<div class="col-wrapper compare-nav">
 		<div class="row nomargin">
-			<a href="<?= makeLangURL('/%/equipment/cafitesse/') ?>"><?= langS('Начать заново', 'Start over') ?></a>
+			<a href="<?= esc_url( strtok( $backURL, '?' ) ) ?>"><?= langS('Начать заново', 'Start over') ?></a>
 			<div class="comparison-button-holder">
                 <? if (count($dispensers) > 1) : ?>
                 <a class="comparison-button-holder share-link hide_same" href=""><?= langS('Скрыть одинаковые поля', 'Hide similiar fields') ?><span></span></a>
@@ -62,7 +63,7 @@
 		</div>
 	</div>
 
-	<div data-decs-machinecount="<?= count($dispensers) ?>" class="col-wrapper col-box compare-machines" id="comparisonTool">
+	<div data-decs-machinecount="<?= count($dispensers) ?>" class="col-wrapper col-box compare-machines" id="comparisonTool" role="region" aria-label="<?= esc_attr( langS( 'Сравнение оборудования', 'Equipment comparison' ) ) ?>" tabindex="0">
         <?
             $i = 0;
             for ($i = 0; $i < 3; $i++) :
@@ -77,8 +78,8 @@
             global $cdLangProps;
         ?>
         <div class="col col-2of6">
-			<div class="machine-name">.
-				<a href="<?= makeLangURL('/%/equipment/dispensers/compare/'.gourmeta_compare_query($correctedIDs, get_the_ID())) ?>" class="close-button"></a>
+			<div class="machine-name">
+				<a href="<?= esc_url( $compareURL . gourmeta_compare_query( $correctedIDs, get_the_ID() ) ) ?>" class="close-button" aria-label="<?= esc_attr( langS( 'Убрать из сравнения', 'Remove from comparison' ) ) ?>"></a>
 				<h2><? the_title() ?></h2>
 			</div>
 			<div class="machine-details-holder">
@@ -114,7 +115,7 @@
         <? else : ?>
         <div class="col col-2of6">
 			<div class="machine-name">
-				<a class="add-button" href="<?= esc_url( $backURL ) ?>"></a>
+				<a class="add-button" aria-label="<?= esc_attr( langS( 'Добавить к сравнению', 'Add to comparison' ) ) ?>" href="<?= esc_url( $backURL ) ?>"></a>
 			</div>
 			<div class="machine-details-holder">
 				<div class="machine-intro">

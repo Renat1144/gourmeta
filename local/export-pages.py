@@ -19,7 +19,7 @@ LIVE_SITE = "http://gourmeta.ru"
 PUBLIC = "https://renat1144.github.io/gourmeta"
 SITE_HOSTS = {urlsplit(SOURCE).netloc, "gourmeta.ru", "www.gourmeta.ru"}
 SITEMAPS = ("page-sitemap.xml", "coffee-dispensers-sitemap.xml", "category-sitemap.xml")
-PAGE_PATH = re.compile(r"/(?:(?:ru|en|category)(?:/[\w%-]+)*/?|(?:vakansii|otzyivyi)/?)?$")
+PAGE_PATH = re.compile(r"/(?:(?:ru|en|category)(?:/[\w%-]+)*/?|(?:vakansii|otzyivyi|privacy-policy|personal-data-consent)/?)?$")
 ASSET_SUFFIXES = {
     ".css", ".js", ".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg", ".ico",
     ".woff", ".woff2", ".ttf", ".otf", ".eot", ".mp4",

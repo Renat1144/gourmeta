@@ -47,6 +47,11 @@
         {
             if ($this->register())
             {
+                $use_block_editor = ! empty( $this->farr_info['show_in_rest'] );
+                $supports = array('title', 'editor', 'thumbnail', 'excerpt', 'revisions');
+                if ( $use_block_editor && $this->farr_meta ) {
+                    $supports[] = 'custom-fields';
+                }
                 register_post_type($this->getPostType(),
                     array(
                         'public' => true,
@@ -54,11 +59,26 @@
                             'slug' => '%c%/'.(isset($this->farr_info['slug']) ? $this->farr_info['slug'] : $this->getPostType()).'/%sc%'
                         ),
                         'taxonomies' => array('category'),
-                        'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'revisions'),
+                        'supports' => $supports,
+                        'show_in_rest' => $use_block_editor,
                         'labels' => $this->farr_info['labels']
                     )
                 );
                 
+                if ( $use_block_editor && $this->farr_meta ) {
+                    foreach ( $this->farr_meta as $group ) {
+                        foreach ( $group['fields'] as $name => $field ) {
+                            register_post_meta( $this->getPostType(), $name, [
+                                'type' => 'string',
+                                'single' => true,
+                                'sanitize_callback' => 'sanitize_text_field',
+                                'auth_callback' => static fn( $allowed, $key, $post_id ) => current_user_can( 'edit_post', $post_id ),
+                                'show_in_rest' => [ 'schema' => [ 'context' => [ 'edit' ] ] ],
+                            ] );
+                        }
+                    }
+                }
+
                 // /wp-includes/class-wp.php
                 // не забываем $flush_rewrite_rules
                 if (isset($this->farr_info['rewrite']) && !empty($this->farr_info['rewrite']))
@@ -116,6 +136,20 @@
             return $link;
         }
         
+        public function editor_fields() {
+            $fields = [];
+            foreach ( $this->farr_meta as $group ) {
+                foreach ( $group['fields'] as $name => $field ) {
+                    $fields[$name] = [
+                        'label' => $group['label'],
+                        'type' => is_array( $field ) ? $field['type'] : explode( ':', $field )[0],
+                        'options' => is_array( $field ) ? ( $field['values'] ?? [] ) : [],
+                    ];
+                }
+            }
+            return $fields;
+        }
+
         public function add_meta_box( $post_type )
         {
             add_meta_box(
@@ -125,6 +159,7 @@
                 ,$this->getPostType()
                 ,'normal'
                 ,'high'
+                ,['__back_compat_meta_box' => ! empty( $this->farr_info['show_in_rest'] )]
             );
         }
         

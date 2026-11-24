@@ -14,6 +14,7 @@ Template Post Type: post, coffee-dispensers
 	<div class="col-wrapper col-wrapper-grey">
 	
         <div class="rows">
+		<h1><?php the_title(); ?></h1>
 		<? the_content(); ?>
 		</div>
             

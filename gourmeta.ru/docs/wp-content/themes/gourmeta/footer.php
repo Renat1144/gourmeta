@@ -12,7 +12,7 @@
 		<script type="text/javascript">
 			Shadowbox.init();
 		</script>
-		<script src="<?= bloginfo('template_url') ?>/js/default.js"></script>
+		<script src="<?php echo esc_url( add_query_arg( 'ver', filemtime( __DIR__ . '/js/default.js' ), get_template_directory_uri() . '/js/default.js' ) ); ?>"></script>
 		
 		<? wp_footer() ?>
 	</body>

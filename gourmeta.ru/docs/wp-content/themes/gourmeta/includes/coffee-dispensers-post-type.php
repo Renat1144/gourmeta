@@ -7,6 +7,7 @@
             parent::__construct(
                 array(
                     'post_type' => 'coffee-dispensers',
+                    'show_in_rest' => true,
                     'labels' => array(
                         'name' => 'Кофе диспенсеры',
                         'singular_name' => 'Кофе диспенсер',

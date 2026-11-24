@@ -149,3 +149,55 @@
 .gourmeta-visual-layout .wp-block-gourmeta-section.col {
 	margin-inline: 18px;
 }
+
+.gourmeta-product-editor .editor-visual-editor__post-title-wrapper {
+	display: none;
+}
+
+.gourmeta-product-editor .is-root-container,
+.gourmeta-product-editor-big .is-root-container {
+	box-sizing: border-box;
+	width: min(calc(100% - 2 * var(--gh-edge)), var(--gh-width));
+	max-width: none;
+	margin: 0 auto var(--gh-content-gap);
+	padding: var(--gh-content-gap);
+	border: 1px solid var(--gh-line-on-light);
+	border-radius: var(--gh-content-radius);
+	background: var(--gh-content-surface);
+}
+
+.gourmeta-product-editor-specs .is-root-container { display: none; }
+
+.gourmeta-inner-page .gourmeta-editor-header .gourmeta-product-editor-tabs {
+	margin-bottom: 0;
+}
+.gourmeta-inner-page .gourmeta-product-editor-tabs .nav.tabs {
+	margin-bottom: var(--gh-content-gap);
+}
+.gourmeta-inner-page.gourmeta-product-editor .is-root-container {
+	box-shadow: var(--gh-content-shadow);
+}
+
+.gourmeta-inner-page .gourmeta-product-editor-tabs .nav.tabs a { cursor: pointer; }
+
+.gourmeta-product-editor-specs .gourmeta-product-editor-tabs .nav.tabs :is(li, li.ui-tabs-selected) a {
+	background: var(--gh-content-surface);
+}
+
+.gourmeta-product-editor-specs .gourmeta-product-editor-tabs .nav.tabs a[href="#specifications"] {
+	background: var(--gh-accent);
+}
+
+.gourmeta-product-editor .gourmeta-product-intro .components-button {
+	margin-top: 10px;
+	background: var(--gh-sand);
+	color: var(--gh-ink);
+}
+
+.gourmeta-inner-page:not(.gourmeta-visual-layout, .gourmeta-product-editor) .editor-visual-editor__post-title-wrapper,
+.gourmeta-inner-page:not(.gourmeta-visual-layout, .gourmeta-product-editor) .is-root-container {
+	box-sizing: border-box;
+	width: min(calc(100% - 2 * var(--gh-edge)), var(--gh-width));
+	max-width: none;
+	margin-inline: auto;
+}

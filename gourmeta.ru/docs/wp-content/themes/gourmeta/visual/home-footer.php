@@ -63,6 +63,7 @@ $footer_group_links = static function ( $attributes, $item, $args ) {
 					<a class="gh-action gh-action-amber" href="<?php echo esc_url( $brand['homeFooterHref'] ); ?>"><?php echo esc_html( $brand['homeFooterButton'] ); ?></a>
 				<?php endif; ?>
 			</div>
+			<?php gourmeta_privacy_footer_links(); ?>
 		</div>
 		<div class="gh-footer-bottom">
 			<p><?php echo wp_kses_post( (string) get_option( 'copyright' ) ); ?></p>
@@ -81,6 +82,9 @@ $footer_group_links = static function ( $attributes, $item, $args ) {
 		</div>
 	</div>
 </footer>
+<?php if ( empty( $gourmeta_editor_preview ) ) : ?>
+	<?php gourmeta_privacy_cookie_controls(); ?>
+<?php endif; ?>
 <?php if ( '' !== $brand['homeBackToTopLabel'] ) : ?>
 	<button type="button" class="gh-back-to-top"
 		aria-label="<?php echo esc_attr( $brand['homeBackToTopLabel'] ); ?>"

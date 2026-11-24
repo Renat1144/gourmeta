@@ -3,12 +3,15 @@
  * Shared page components and the Gutenberg interface for the Gourmeta theme.
  */
 
+require_once __DIR__ . '/product.php';
+require_once __DIR__ . '/privacy.php';
+
 const GOURMETA_VISUAL_BLOCKS = [
 	'hero' => [ 'Главный экран Gourmeta', 'cover-image', [] ],
 	'home-layout' => [ 'Главная Gourmeta', 'admin-home', [] ],
 	'section' => [ 'Секция', 'layout', [ 'tag' => 'string', 'html' => 'object' ] ],
 	'text' => [ 'Текст Gourmeta', 'editor-paragraph', [ 'tag' => 'string', 'html' => 'object', 'value' => 'string' ] ],
-	'image' => [ 'Изображение Gourmeta', 'format-image', [ 'html' => 'object' ] ],
+	'image' => [ 'Изображение Gourmeta', 'format-image', [ 'html' => 'object', 'lightbox' => 'boolean' ] ],
 	'link' => [ 'Ссылка Gourmeta', 'admin-links', [ 'html' => 'object' ] ],
 	'title' => [ 'Заголовок страницы', 'heading', [] ],
 	'slideshow' => [ 'Слайдер Gourmeta', 'images-alt2', [ 'pause' => 'number' ] ],
@@ -53,29 +56,37 @@ add_filter( 'block_categories_all', static function ( $categories ) {
 	return $categories;
 } );
 
-function gourmeta_is_designed_home( $post = null ) {
-	$post = get_post( $post );
-	return $post && (int) $post->ID === (int) get_option( 'page_on_front' ) && has_block( 'gourmeta/home-layout', $post );
-}
-
 function gourmeta_is_hero_home( $post = null ) {
 	$post = get_post( $post );
 	return $post && (int) $post->ID === (int) get_option( 'page_on_front' ) &&
 		( has_block( 'gourmeta/hero', $post ) || has_block( 'gourmeta/home-layout', $post ) );
 }
 
-add_filter( 'body_class', static function ( $classes ) {
-	if ( is_front_page() && gourmeta_is_hero_home() ) {
-		$classes[] = 'gourmeta-hero-home';
+function gourmeta_design_styles( $include_inner = true ) {
+	$files = [ 'hero.css', 'home.css', 'privacy.css' ];
+	if ( $include_inner ) {
+		$files[] = 'inner.css';
 	}
+	return array_map( static function ( $file ) {
+		return add_query_arg( 'ver', filemtime( __DIR__ . '/' . $file ), get_template_directory_uri() . '/visual/' . $file );
+	}, $files );
+}
+
+add_filter( 'body_class', static function ( $classes ) {
+	$classes[] = 'gourmeta-site';
+	$classes[] = is_front_page() && gourmeta_is_hero_home() ? 'gourmeta-hero-home' : 'gourmeta-inner-page';
 	return $classes;
 } );
 
 add_action( 'wp_enqueue_scripts', static function () {
-	if ( is_front_page() && gourmeta_is_hero_home() ) {
-		wp_enqueue_script( 'gourmeta-hero-navigation', get_template_directory_uri() . '/visual/hero.js',
-			[], filemtime( __DIR__ . '/hero.js' ), true );
-	}
+	wp_enqueue_script( 'gourmeta-hero-navigation', get_template_directory_uri() . '/visual/hero.js',
+		[], filemtime( __DIR__ . '/hero.js' ), true );
+	wp_enqueue_script( 'gourmeta-privacy', get_template_directory_uri() . '/visual/privacy.js',
+		[], filemtime( __DIR__ . '/privacy.js' ), true );
+} );
+
+add_filter( 'wp_video_shortcode_library', static function ( $library ) {
+	return is_singular( 'coffee-dispensers' ) ? '' : $library;
 } );
 
 add_filter( 'template_include', static function ( $template ) {
@@ -86,20 +97,22 @@ add_filter( 'template_include', static function ( $template ) {
 } );
 
 add_filter( 'use_block_editor_for_post', static function ( $use, $post ) {
-	return 'page' === $post->post_type ? true : $use;
-}, 100, 2 );
+	return in_array( $post->post_type, [ 'page', 'coffee-dispensers' ], true ) ? true : $use;
+}, 101, 2 );
 
 add_action( 'enqueue_block_editor_assets', static function () {
+	global $gourmeta_coffee_dispensers;
 	$screen = get_current_screen();
-	if ( ! $screen || 'page' !== $screen->post_type ) {
+	if ( ! $screen || ! in_array( $screen->post_type, [ 'page', 'coffee-dispensers' ], true ) ) {
 		return;
 	}
 
-	$post = isset( $_GET['post'] ) ? get_post( absint( $_GET['post'] ) ) : null;
+	$post = get_post();
+	$product = 'coffee-dispensers' === $screen->post_type;
 	$uri = get_template_directory_uri();
 	wp_enqueue_script( 'gourmeta-visual-editor', $uri . '/visual/editor.js',
 		[ 'wp-api-fetch', 'wp-blocks', 'wp-block-editor', 'wp-components', 'wp-core-data',
-			'wp-data', 'wp-element', 'wp-plugins', 'wp-url' ],
+			'wp-data', 'wp-editor', 'wp-element', 'wp-plugins', 'wp-url' ],
 		filemtime( __DIR__ . '/editor.js' ), true
 	);
 
@@ -114,7 +127,8 @@ add_action( 'enqueue_block_editor_assets', static function () {
 		'visual' => $post && (bool) get_post_meta( $post->ID, '_gourmeta_visual_layout', true ),
 		'home' => $post && ( 'page-templates/main-page.php' === get_page_template_slug( $post ) ),
 		'homeHero' => $post && gourmeta_is_hero_home( $post ),
-		'homeLayout' => $post && gourmeta_is_designed_home( $post ),
+		'product' => $product,
+		'productFields' => $product ? $gourmeta_coffee_dispensers->editor_fields() : [],
 		'siteUrl' => home_url( '/' ),
 		'productsUrl' => admin_url( 'edit.php?post_type=coffee-dispensers' ),
 		'formsUrl' => admin_url( 'admin.php?page=wpcf7' ),
@@ -123,8 +137,9 @@ add_action( 'enqueue_block_editor_assets', static function () {
 				return add_query_arg( 'ver', filemtime( dirname( __DIR__ ) . '/' . $file ), $uri . '/' . $file );
 			}, [
 				'css/default.css', 'css/layout.css', 'css/components.css', 'css/animations.css',
-				'css/forms.css', 'css/pushbox.css', 'css/content.css', 'style.css', 'visual/editor.css', 'visual/hero.css', 'visual/home.css',
+				'css/forms.css', 'css/pushbox.css', 'css/content.css', 'style.css', 'visual/editor.css',
 			] ),
+			gourmeta_design_styles(),
 			[ plugins_url( 'contact-form-7/includes/css/styles.css' ), plugins_url( 'sitemap/css/page-list.css' ) ]
 		),
 	] ) . ';', 'before' );
@@ -186,6 +201,10 @@ function gourmeta_render_block( $name, $attributes, $content, $block ) {
 				$tag = 'div';
 			}
 			$opening = '<' . $tag . gourmeta_visual_attributes( $tag, $html ) . '>';
+			if ( 'image' === $name && ! empty( $attributes['lightbox'] ) && ! empty( $html['src'] ) && esc_url( $html['src'] ) ) {
+				return '<a class="gourmeta-image-zoom" data-gourmeta-lightbox href="' . esc_url( $html['src'] ) .
+					'" aria-label="Увеличить изображение">' . $opening . '</a>';
+			}
 			if ( in_array( $tag, [ 'img', 'hr', 'br', 'col' ], true ) ) {
 				return $opening;
 			}
@@ -224,19 +243,7 @@ function gourmeta_render_block( $name, $attributes, $content, $block ) {
 
 function gourmeta_visual_component( $kind, $shortcode = '', $gourmeta_editor_preview = false ) {
 	if ( 'map' === $kind ) {
-		$url = wp_parse_url( $shortcode );
-		if ( ( $url['scheme'] ?? '' ) !== 'https' || ( $url['host'] ?? '' ) !== 'api-maps.yandex.ru' ||
-			( $url['path'] ?? '' ) !== '/services/constructor/1.0/js/' ) {
-			return '';
-		}
-		if ( $gourmeta_editor_preview ) {
-			parse_str( $url['query'] ?? '', $parameters );
-			$width = min( 1600, max( 100, absint( $parameters['width'] ?? 600 ) ) );
-			$height = min( 1600, max( 100, absint( $parameters['height'] ?? 400 ) ) );
-			$map_url = 'https://yandex.ru/map-widget/v1/?' . ( $url['query'] ?? '' );
-			return '<iframe title="Карта проезда" src="' . esc_url( $map_url ) . '" width="' . $width . '" height="' . $height . '" loading="lazy"></iframe>';
-		}
-		return '<script charset="utf-8" async src="' . esc_url( $shortcode ) . '"></script>';
+		return gourmeta_privacy_map( $shortcode );
 	}
 
 	if ( in_array( $kind, [ 'form', 'sitemap' ], true ) ) {
@@ -311,7 +318,7 @@ add_action( 'rest_api_init', static function () {
 		'methods' => WP_REST_Server::READABLE,
 		'permission_callback' => static function ( $request ) {
 			$page = get_post( (int) $request['id'] );
-			return $page && 'page' === $page->post_type && current_user_can( 'edit_post', $page->ID );
+			return $page && in_array( $page->post_type, [ 'page', 'coffee-dispensers' ], true ) && current_user_can( 'edit_post', $page->ID );
 		},
 		'callback' => 'gourmeta_visual_preview',
 	] );
@@ -328,7 +335,8 @@ function gourmeta_visual_preview( $request ) {
 	$previous_query = $wp_query;
 	$post = get_post( (int) $request['id'] );
 	$id = $post->ID;
-	$wp_query = new WP_Query( [ 'page_id' => $id, 'post_status' => $post->post_status ] );
+	$query = 'page' === $post->post_type ? [ 'page_id' => $id ] : [ 'p' => $id, 'post_type' => $post->post_type ];
+	$wp_query = new WP_Query( $query + [ 'post_status' => $post->post_status ] );
 	setup_postdata( $post );
 	$path = wp_parse_url( get_permalink( $id ), PHP_URL_PATH );
 	$gourmeta_preview_language = str_starts_with( (string) $path, '/en/' ) ? 'en' : 'ru';
@@ -340,7 +348,16 @@ function gourmeta_visual_preview( $request ) {
 				'html' => gourmeta_visual_component( $kind, (string) $request['shortcode'], true ),
 			] );
 		}
+		$product = [];
+		if ( 'coffee-dispensers' === $post->post_type && 'single-coffee-dispensers2.php' !== get_page_template_slug( $post ) ) {
+			foreach ( [ 'intro', 'tabs', 'specifications', 'actions' ] as $part ) {
+				ob_start();
+				gourmeta_render_product_part( $part, true );
+				$product[ $part ] = ob_get_clean();
+			}
+		}
 		return rest_ensure_response( [
+			'product' => $product,
 			'phone' => (array) get_option( 'phone' ),
 			'header' => gourmeta_visual_component( 'header', '', true ),
 			'footer' => gourmeta_visual_component( 'footer', '', true ),

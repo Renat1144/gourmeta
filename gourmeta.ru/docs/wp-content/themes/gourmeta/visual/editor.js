@@ -3,7 +3,7 @@
 
 	const { createElement: el, Fragment, createPortal, useEffect, useState } = wp.element;
 	const { InspectorControls, MediaUpload, MediaUploadCheck, RichText, InnerBlocks, useBlockProps, useInnerBlocksProps } = wp.blockEditor;
-	const { Button, Modal, Notice, PanelBody, SelectControl, Spinner, TextControl } = wp.components;
+	const { Button, CheckboxControl, Modal, Notice, PanelBody, SelectControl, Spinner, TextControl, ToggleControl } = wp.components;
 	const { useSelect } = wp.data;
 
 	const getPostId = (select) => select('core/editor').getCurrentPostId();
@@ -124,11 +124,20 @@
 	function ImageBlock({ attributes, setAttributes }) {
 		const html = attributes.html || {};
 		const update = (value) => setAttributes({ html: value });
-		const props = useBlockProps({ ...elementProps(html, ['src', 'alt']), className: html.class || '' });
+		const imageProps = { ...elementProps(html, ['src', 'alt']), src: html.src, alt: html.alt || '', draggable: false };
+		const zoom = Boolean(attributes.lightbox && html.src);
+		const props = useBlockProps(zoom ? { className: 'gourmeta-image-zoom' } : html.src ? imageProps : { className: html.class });
 		return el(Fragment, {},
-			layoutPanel(html, update, imageControls(html, update)),
-			html.src ? el('img', { ...props, src: html.src, alt: html.alt || '', draggable: false })
-				: el('div', props, mediaButton('Выбрать изображение', (image) => update({ ...html, src: image.url, alt: image.alt || '' })))
+			layoutPanel(html, update, el(Fragment, {},
+				imageControls(html, update),
+				el(ToggleControl, {
+					label: 'Увеличивать по клику',
+					checked: Boolean(attributes.lightbox),
+					onChange: (lightbox) => setAttributes({ lightbox }),
+				})
+			)),
+			zoom ? el('div', props, el('img', imageProps)) :
+				html.src ? el('img', props) : el('div', props, mediaButton('Выбрать изображение', (image) => update({ ...html, src: image.url, alt: image.alt || '' })))
 		);
 	}
 
@@ -279,28 +288,23 @@
 			title: { header: 'Общая шапка', footer: 'Общий подвал', menu: 'Общие меню' }[part],
 			onRequestClose: busy ? () => {} : onClose,
 		},
-			el('p', {}, part === 'header' && settings.homeHero
-				? 'Этот логотип используется только на главной. Логотип партнёра общий для сайта.'
-				: part === 'footer' && settings.homeLayout
-					? 'Телефон, заголовок контактов и подпись общие для сайта. Остальные поля относятся к подвалу главной.'
-					: 'Изменения применятся на всех страницах сайта.'),
-			part === 'header' && el(Fragment, {}, media(settings.homeHero ? 'homeLogo' : 'logo', settings.homeHero ? 'Логотип первого экрана' : 'Логотип Gourmeta'), media('partners', 'Логотип партнёра')),
+			el('p', {}, 'Изменения применятся на всех страницах сайта.'),
+			part === 'header' && el(Fragment, {}, media('homeLogo', 'Логотип Gourmeta'), media('partners', 'Логотип партнёра')),
 			part === 'footer' && el(Fragment, {},
 				el(TextControl, { label: 'Заголовок контактов', value: values.contactHeading, onChange: (value) => patch('contactHeading', value) }),
 				el(TextControl, { label: 'Телефон для набора', value: values.phone?.clear || '', onChange: (value) => patch('phone', { ...values.phone, clear: value }) }),
 				el(TextControl, { label: 'Телефон на странице', value: values.phone?.formated || '', onChange: (value) => patch('phone', { ...values.phone, formated: value }) }),
 				el(TextControl, { label: 'Подпись в подвале', value: values.copyright, onChange: (value) => patch('copyright', value) }),
-				settings.homeLayout && el(Fragment, {},
-					el(TextControl, { label: 'Текст под логотипом', value: values.homeFooterSummary, onChange: (value) => patch('homeFooterSummary', value) }),
-					el(TextControl, { label: 'Электронная почта', type: 'email', value: values.homeFooterEmail, onChange: (value) => patch('homeFooterEmail', value) }),
-					el(TextControl, { label: 'Текст кнопки', value: values.homeFooterButton, onChange: (value) => patch('homeFooterButton', value) }),
-					el(TextControl, { label: 'Ссылка кнопки', value: values.homeFooterHref, onChange: (value) => patch('homeFooterHref', value) }),
-					el(TextControl, {
-						label: 'Подсказка к кнопке «В начало»', value: values.homeBackToTopLabel,
-						help: 'Очистите поле, чтобы скрыть кнопку.',
-						onChange: (value) => patch('homeBackToTopLabel', value)
-					})
-				)),
+				el(TextControl, { label: 'Текст под логотипом', value: values.homeFooterSummary, onChange: (value) => patch('homeFooterSummary', value) }),
+				el(TextControl, { label: 'Электронная почта', type: 'email', value: values.homeFooterEmail, onChange: (value) => patch('homeFooterEmail', value) }),
+				el(TextControl, { label: 'Текст кнопки', value: values.homeFooterButton, onChange: (value) => patch('homeFooterButton', value) }),
+				el(TextControl, { label: 'Ссылка кнопки', value: values.homeFooterHref, onChange: (value) => patch('homeFooterHref', value) }),
+				el(TextControl, {
+					label: 'Подсказка к кнопке «В начало»', value: values.homeBackToTopLabel,
+					help: 'Очистите поле, чтобы скрыть кнопку.',
+					onChange: (value) => patch('homeBackToTopLabel', value)
+				})
+			),
 			part === 'menu' && el(Fragment, {},
 				el(SelectControl, {
 					label: 'Меню', value: menuId,
@@ -347,7 +351,64 @@
 					setError(failure.message || 'Не удалось сохранить настройки.');
 					setBusy(false);
 				}
-			} }, part === 'footer' && settings.homeLayout ? 'Сохранить настройки подвала' : 'Сохранить для всего сайта')
+			} }, 'Сохранить для всего сайта')
+		);
+	}
+
+	function ProductFields() {
+		const [saved, setMeta] = wp.coreData.useEntityProp('postType', 'coffee-dispensers', 'meta');
+		if (!saved) return null;
+		const change = (key, value) => setMeta({ ...saved, [key]: value });
+		return el(wp.editor.PluginDocumentSettingPanel, { name: 'product-specifications', title: 'Характеристики оборудования' },
+			Object.entries(settings.productFields).map(([key, field]) => {
+				const props = { key, label: field.label, value: saved[key] || '', onChange: (value) => change(key, value) };
+				if (field.type === 'checkbox') {
+					return el(CheckboxControl, { key, label: field.label, checked: Boolean(saved[key]), onChange: (checked) => change(key, checked ? 'on' : '') });
+				}
+				if (field.type === 'select') {
+					const options = Object.entries(field.options).map(([value, label]) => ({ value, label: String(label) }));
+					return el(SelectControl, { ...props, options: [{ value: '', label: '—' }, ...options] });
+				}
+				return el(TextControl, props);
+			})
+		);
+	}
+
+	function ProductIntro({ markup }) {
+		const [container, setContainer] = useState(null);
+		const { title, featured } = useSelect((select) => {
+			const editor = select('core/editor');
+			return {
+				title: editor.getEditedPostAttribute('title'),
+				featured: editor.getEditedPostAttribute('featured_media'),
+			};
+		}, []);
+		const image = useSelect((select) => featured ? select('core').getMedia(featured) : null, [featured]);
+		const update = (attributes) => wp.data.dispatch('core/editor').editPost(attributes);
+		const heading = container?.querySelector('h1');
+		const photo = container?.querySelector('.image-holder');
+		useEffect(() => {
+			if (heading) [...heading.childNodes].filter((node) => node.nodeType === 3).forEach((node) => node.remove());
+			if (photo && (!featured || image)) photo.querySelector('img:not([data-editor-photo])')?.remove();
+		}, [heading, photo, featured, image, markup]);
+		return el(Fragment, {},
+			el('div', { ref: setContainer, dangerouslySetInnerHTML: { __html: markup } }),
+			heading && createPortal(el(RichText, {
+				tagName: 'span',
+				allowedFormats: [],
+				value: String(title || '').replace(/&/g, '&amp;').replace(/</g, '&lt;'),
+				placeholder: 'Название оборудования',
+				'aria-label': 'Название оборудования',
+				onChange: (value) => {
+					const text = document.createElement('span');
+					text.innerHTML = value;
+					update({ title: text.textContent });
+				},
+			}), heading),
+			photo && createPortal(el(Fragment, {},
+				image && el('img', { 'data-editor-photo': '', src: image.source_url, alt: image.alt_text || '' }),
+				mediaButton(image ? 'Заменить фото' : 'Выбрать фото', (media) => update({ featured_media: media.id }))
+			), photo)
 		);
 	}
 
@@ -355,17 +416,27 @@
 		const id = useSelect(getPostId, []);
 		const [mounts, setMounts] = useState(null);
 		const [part, setPart] = useState(null);
-		const state = usePreview(id, 'chrome', '');
+		const [showSpecs, setShowSpecs] = useState(false);
+		const savedProduct = useSelect((select) => settings.product ? select('core/editor').getCurrentPost()?.modified : null, []);
+		const state = usePreview(id, 'chrome', savedProduct || '');
+		const product = state.product?.intro ? state.product : null;
+		useEffect(() => {
+			if (!mounts) return;
+			mounts.canvas.classList.toggle('gourmeta-product-editor', Boolean(product));
+			mounts.canvas.classList.toggle('gourmeta-product-editor-big', settings.product && Array.isArray(state.product));
+			mounts.canvas.classList.toggle('gourmeta-product-editor-specs', showSpecs);
+		}, [mounts, product, state.product, showSpecs]);
 		useEffect(() => {
 			let canvas;
 			let head;
 			let foot;
+			let details;
 			function attach() {
 				const frame = document.querySelector('iframe[name="editor-canvas"]');
 				const doc = frame?.contentDocument || document;
 				const wrapper = doc.querySelector('.editor-styles-wrapper');
 				if (!wrapper || canvas === wrapper) return;
-				head?.remove(); foot?.remove();
+				head?.remove(); foot?.remove(); details?.remove();
 				canvas = wrapper;
 				const make = (className) => {
 					const node = doc.createElement('div');
@@ -374,23 +445,26 @@
 				};
 				head = make('gourmeta-editor-header');
 				foot = make('gourmeta-editor-footer');
+				details = make('gourmeta-editor-product-details');
 				wrapper.prepend(head);
-				wrapper.append(foot);
+				wrapper.append(details, foot);
 				wrapper.classList.toggle('gourmeta-visual-layout', settings.visual);
 				wrapper.classList.toggle('gourmeta-editor-home', settings.home);
+				wrapper.classList.add('gourmeta-site');
 				wrapper.classList.toggle('gourmeta-hero-home', settings.homeHero);
+				wrapper.classList.toggle('gourmeta-inner-page', !settings.homeHero);
 				for (const url of settings.css) {
-					if (doc === document || doc.querySelector('link[href="' + url + '"]')) continue;
+					if ((doc === document && !/\/visual\//.test(url)) || doc.querySelector('link[href="' + url + '"]')) continue;
 					const link = doc.createElement('link');
 					link.rel = 'stylesheet';
 					link.href = url;
 					doc.head.append(link);
 				}
-				setMounts({ head, foot });
+				setMounts({ head, foot, details, canvas: wrapper });
 			}
 			attach();
 			const timer = window.setInterval(attach, 350);
-			return () => { window.clearInterval(timer); head?.remove(); foot?.remove(); };
+			return () => { window.clearInterval(timer); head?.remove(); foot?.remove(); details?.remove(); };
 		}, []);
 
 		if (!mounts || !id) return null;
@@ -400,8 +474,26 @@
 			createPortal(el(Fragment, {},
 				el(PreviewMarkup, { markup: state.header }),
 				controls([['header', 'Редактировать шапку'], ['menu', 'Редактировать меню']]),
-				state.error && el(Notice, { status: 'error', isDismissible: false }, state.error)
+				state.error && el(Notice, { status: 'error', isDismissible: false }, state.error),
+				product && el(Fragment, {},
+					el(ProductIntro, { markup: product.intro }),
+					el('div', {
+						className: 'gourmeta-product-description gourmeta-product-editor-tabs',
+						onClick: (event) => {
+							const tab = event.target.closest('a[href^="#"]');
+							if (!tab) return;
+							event.preventDefault();
+							setShowSpecs(tab.hash === '#specifications');
+						},
+						dangerouslySetInnerHTML: { __html: product.tabs },
+					})
+				)
 			), mounts.head),
+			product && createPortal(el('div', { className: 'col-wrapper gourmeta-product-description' },
+				showSpecs && el('div', { className: 'machine-properties-holder' },
+					el(PreviewMarkup, { markup: product.specifications })),
+				el(PreviewMarkup, { markup: product.actions }),
+			), mounts.details),
 			createPortal(el(Fragment, {},
 				el(PreviewMarkup, { markup: state.footer }),
 				controls([['footer', 'Редактировать подвал']])
@@ -415,4 +507,5 @@
 	}
 
 	wp.plugins.registerPlugin('gourmeta-visual-chrome', { render: Chrome });
+	if (settings.product) wp.plugins.registerPlugin('gourmeta-product-fields', { render: ProductFields });
 })(window.wp, window.gourmetaEditor);

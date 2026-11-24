@@ -1,0 +1,1906 @@
+.gourmeta-inner-page {
+	--gh-content-gap: clamp(18px, 3vw, 38px);
+	--gh-content-radius: clamp(16px, 2.3vw, 28px);
+	--gh-content-surface: color-mix(in srgb, var(--gh-sand) 57%, var(--gh-paper));
+	--gh-content-shadow: 0 16px 38px #382e2714;
+	--gh-heading-bg:
+		repeating-linear-gradient(119deg, transparent 0 16px, #f8f3ea0b 16px 17px),
+		radial-gradient(ellipse at 88% 6%, #554235, transparent 72%),
+		linear-gradient(115deg, var(--gh-ink), var(--gh-ink-soft));
+}
+
+.gourmeta-inner-page:is(body, .editor-styles-wrapper) {
+	background: var(--gh-sand);
+	color: var(--gh-ink);
+	font: 500 1rem/1.65 var(--gh-font);
+}
+
+.gourmeta-inner-page .breadcrumb-wrapper {
+	height: auto;
+	min-height: 48px;
+	margin-bottom: clamp(14px, 2.1vw, 26px);
+	padding: 0;
+	background: var(--gh-sand);
+}
+
+.gourmeta-inner-page .breadcrumb-container {
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: min(calc(100% - 2 * var(--gh-edge)), var(--gh-width));
+	min-height: 48px;
+	gap: 12px;
+}
+
+.gourmeta-inner-page .breadcrumb {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 4px 12px;
+	padding: 9px 0;
+	margin: 0;
+	color: var(--gh-muted);
+	font: 650 .76rem/1.4 var(--gh-font);
+}
+
+.gourmeta-inner-page .breadcrumb li {
+	float: none;
+	display: inline-flex;
+	align-items: center;
+	gap: 12px;
+	margin: 0;
+	padding: 0;
+	background: none;
+	color: var(--gh-muted);
+}
+
+.gourmeta-inner-page .breadcrumb li + li::before {
+	content: "";
+	width: 5px;
+	height: 5px;
+	border: solid currentColor;
+	border-width: 1px 1px 0 0;
+	transform: rotate(45deg);
+}
+
+.gourmeta-inner-page :is(.breadcrumb, .gourmeta-utility-menu) li a {
+	color: var(--gh-muted);
+}
+
+.gourmeta-inner-page .gourmeta-utility-menu {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin: 0 0 0 auto;
+	padding: 8px 0;
+	list-style: none;
+	font: 650 .76rem/1.4 var(--gh-font);
+}
+
+.gourmeta-inner-page .gourmeta-utility-menu + .addthis_toolbox { margin-left: 0; }
+
+.gourmeta-inner-page .breadcrumb-container .addthis_toolbox {
+	flex: none;
+	display: flex;
+	justify-content: end;
+	align-items: center;
+	gap: 8px;
+	margin: 0 0 0 auto;
+	padding: 0;
+}
+
+.gourmeta-inner-page .breadcrumb-container .addthis_toolbox a {
+	box-sizing: border-box;
+	display: grid;
+	place-items: center;
+	position: relative;
+	width: 32px;
+	height: 32px;
+	margin: 0;
+	padding: 0;
+	background: var(--gh-content-surface);
+	border: 1px solid var(--gh-line-on-light);
+	border-radius: 9px;
+}
+
+.gourmeta-inner-page .breadcrumb-container .addthis_toolbox a:hover { background: var(--gh-accent); }
+.gourmeta-inner-page .breadcrumb-container .addthis_toolbox img { display: block; border-radius: 3px; }
+.gourmeta-inner-page .breadcrumb-container .addthis_toolbox .print-btn::before {
+	content: "";
+	width: 13px;
+	height: 9px;
+	margin-top: -2px;
+	border: 1px solid var(--gh-muted);
+	border-radius: 3px;
+}
+.gourmeta-inner-page .breadcrumb-container .addthis_toolbox .print-btn::after {
+	position: absolute;
+	content: "";
+	width: 7px;
+	height: 6px;
+	margin-top: 7px;
+	border: 1px solid var(--gh-muted);
+	background-color: inherit;
+}
+
+.gourmeta-inner-page :is(.col-wrapper, .gourmeta-product-description) {
+	box-sizing: border-box;
+	width: min(calc(100% - 2 * var(--gh-edge)), var(--gh-width));
+	max-width: none;
+	margin: 0 auto var(--gh-content-gap);
+	padding: 0;
+	color: var(--gh-ink);
+	background: none;
+	border: 0;
+	box-shadow: none;
+	overflow-wrap: anywhere;
+}
+
+.gourmeta-inner-page :is(.col-wrapper, .gourmeta-product-description) :where(.col-wrapper) {
+	width: 100%;
+}
+.gourmeta-inner-page :is(.col-wrapper, .gourmeta-product-description) :where(.row, .rows, .col, .page) {
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 100%;
+	min-width: 0;
+	float: none;
+	margin-inline: 0;
+}
+.gourmeta-inner-page .col-wrapper :is(.row, .rows) { margin-bottom: var(--gh-content-gap); }
+.gourmeta-inner-page .col-wrapper > :is(.row, .rows):last-child { margin-bottom: 0; }
+.gourmeta-inner-page .col-wrapper .row + .row { margin-top: var(--gh-content-gap); }
+.gourmeta-inner-page .col-wrapper .row:empty,
+.gourmeta-inner-page .col-wrapper .col-wrapper-grey-bottom { display: none; }
+
+.gourmeta-inner-page .col-wrapper .col:has(> h1) {
+	margin-inline: 0;
+}
+
+.gourmeta-inner-page .col-wrapper .row.search > .col {
+	margin-inline: auto;
+}
+
+.gourmeta-inner-page :is(.col-wrapper, .gourmeta-product-description) :is(h1, h2, h3, h4, h5, h6) {
+	color: var(--gh-ink);
+	font-family: var(--gh-font);
+	line-height: 1.14;
+	letter-spacing: -.035em;
+}
+.gourmeta-inner-page :is(.col-wrapper, .gourmeta-product-description, .editor-visual-editor__post-title-wrapper) h1 {
+	box-sizing: border-box;
+	max-width: none;
+	margin: 0 auto var(--gh-content-gap);
+	padding: clamp(25px, 5vw, 70px);
+	background: var(--gh-heading-bg);
+	border: 1px solid var(--gh-line-on-dark);
+	border-radius: var(--gh-content-radius);
+	color: var(--gh-paper);
+	font-size: clamp(1.9rem, 4.7vw, 4.25rem);
+	font-weight: 790;
+	letter-spacing: -.065em;
+	text-align: center;
+	box-shadow: var(--gh-content-shadow);
+	text-wrap: balance;
+}
+.gourmeta-inner-page :is(.col-wrapper, .gourmeta-product-description) h2 {
+	margin: 0 0 .6em;
+	font-size: clamp(1.3rem, 2.45vw, 2.3rem);
+	font-weight: 755;
+	text-wrap: balance;
+}
+.gourmeta-inner-page :is(.col-wrapper, .gourmeta-product-description) :is(h3, h4, h5, h6) {
+	margin: 0 0 .48em;
+	font-size: clamp(1.05rem, 1.65vw, 1.5rem);
+	font-weight: 725;
+}
+
+.gourmeta-inner-page :is(.col-wrapper, .gourmeta-product-description) p {
+	margin: 0 0 .9em;
+	font: inherit;
+}
+.gourmeta-inner-page :is(.col-wrapper, .gourmeta-product-description) p:empty { margin: 0; }
+.gourmeta-inner-page :is(.col-wrapper, .gourmeta-product-description) :where(p, li, td, h2, h3) a:not(.button, .call-link) {
+	color: var(--gh-ink);
+	text-underline-offset: .22em;
+}
+.gourmeta-inner-page :is(.col-wrapper, .gourmeta-product-description) :is(img, iframe, video) { max-width: 100%; }
+.gourmeta-inner-page :is(.col-wrapper, .gourmeta-product-description) img {
+	height: auto;
+	border-radius: 10px;
+	vertical-align: middle;
+}
+
+.gourmeta-inner-page .col-wrapper .row:has(> .col-3of6 + .col-2of6) {
+	display: grid;
+	grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr);
+	align-items: center;
+	gap: var(--gh-content-gap);
+	padding: var(--gh-content-gap);
+	background: var(--gh-content-surface);
+	border: 1px solid var(--gh-line-on-light);
+	border-radius: var(--gh-content-radius);
+	box-shadow: var(--gh-content-shadow);
+}
+.gourmeta-inner-page .col-wrapper .row:has(> .col-3of6 + .col-2of6)::before,
+.gourmeta-inner-page .col-wrapper .row:has(> .col-3of6 + .col-2of6)::after { display: none; }
+.gourmeta-inner-page .col-wrapper .row:has(> .col-3of6 + .col-2of6) .col-2of6 {
+	text-align: center;
+}
+.gourmeta-inner-page .col-wrapper .row:has(> .col-3of6 + .col-2of6) .col-2of6 img {
+	width: auto;
+	max-height: 330px;
+	object-fit: contain;
+}
+
+.gourmeta-inner-page :is(.col-wrapper, .gourmeta-product-description) :where(table) {
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 100%;
+	border-collapse: separate;
+	border-spacing: 0;
+	border-radius: var(--gh-content-radius);
+	background: var(--gh-content-surface);
+}
+.gourmeta-inner-page :is(.col-wrapper, .gourmeta-product-description) :where(th, td) {
+	box-sizing: border-box;
+	padding: clamp(8px, 2vw, 24px);
+	border-color: var(--gh-line-on-light);
+	vertical-align: top;
+}
+.gourmeta-inner-page .col-wrapper .page-list { columns: 2 22rem; column-gap: var(--gh-content-gap); }
+.gourmeta-inner-page .col-wrapper .page-list > li { break-inside: avoid-column; margin-block: 0 12px; }
+
+.gourmeta-inner-page :is(.col-wrapper.call-to-action, .col-wrapper .call-to-action, .col-wrapper .tab-bottom) {
+	box-sizing: border-box;
+	width: 100%;
+	height: auto;
+	margin: 0 0 var(--gh-content-gap);
+	padding: clamp(18px, 3vw, 30px);
+	background: var(--gh-ink-soft);
+	color: var(--gh-paper);
+	border: 1px solid var(--gh-line-on-dark);
+	border-radius: var(--gh-content-radius);
+	box-shadow: var(--gh-content-shadow);
+}
+.gourmeta-inner-page .col-wrapper.call-to-action {
+	background-color: var(--gh-ink);
+}
+.gourmeta-inner-page .col-wrapper .tab-bottom .call-to-action {
+	margin: 0;
+	padding: 0;
+	background: none;
+	border: 0;
+	box-shadow: none;
+}
+.gourmeta-inner-page .col-wrapper :is(.call-to-action, .tab-bottom) :is(em, h2, .call-link) {
+	color: inherit;
+	font-family: var(--gh-font);
+}
+.gourmeta-inner-page .col-wrapper .call-to-action em:empty { display: none; }
+.gourmeta-inner-page .col-wrapper .call-button-holder {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 10px 16px;
+	margin: 0;
+}
+.gourmeta-inner-page .col-wrapper .call-button-holder p {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin: 0;
+}
+.gourmeta-inner-page .col-wrapper .call-button-holder a.call-link { margin: 0; }
+
+.gourmeta-inner-page :is(.col-wrapper, .gourmeta-product-description, .product-toolbox) :is(a.button, a.cta, input[type="submit"]) {
+	box-sizing: border-box;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: auto;
+	height: auto;
+	min-height: 44px;
+	margin: 0;
+	padding: 11px 17px;
+	border: 1px solid var(--gh-line-on-light);
+	border-radius: 11px;
+	background: var(--gh-accent);
+	color: var(--gh-ink);
+	font: 730 .84rem/1.25 var(--gh-font);
+	letter-spacing: -.01em;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: none;
+	text-transform: none;
+	white-space: normal;
+	cursor: pointer;
+}
+.gourmeta-inner-page :is(.col-wrapper, .gourmeta-product-description, .product-toolbox) :is(a.button, a.cta, input[type="submit"]):hover {
+	background: var(--gh-sand);
+	color: var(--gh-ink);
+}
+.gourmeta-inner-page :is(.col-wrapper, .gourmeta-product-description, .product-toolbox) :is(a.button, a.cta) > span:not(.gourmeta-edit-button-label),
+.gourmeta-inner-page .col-wrapper a.call-link > span:empty,
+.gourmeta-inner-page .col-wrapper :is(.button, .cta, .readmore, .return)::after,
+.gourmeta-inner-page .col-wrapper .form-item input[type="submit"]::after {
+	display: none;
+}
+.gourmeta-inner-page .col-wrapper :is(a.return, a.readmore, .compare-nav a) {
+	background: none;
+	padding-left: 0;
+	color: var(--gh-ink);
+	font: 720 .87rem/1.4 var(--gh-font);
+	text-decoration: underline;
+	text-underline-offset: .25em;
+}
+.gourmeta-inner-page :is(.col-wrapper, .breadcrumb-wrapper, .gourmeta-product-description) :is(a, button, input, select, textarea):focus-visible {
+	outline: 2px solid #826246;
+	outline-offset: 3px;
+}
+
+.gourmeta-inner-page .col-wrapper .product-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
+	gap: var(--gh-content-gap);
+	background: none;
+}
+.gourmeta-inner-page .col-wrapper .product-list::before,
+.gourmeta-inner-page .col-wrapper .product-list::after { display: none; }
+.gourmeta-inner-page .col-wrapper .product-list .col {
+	display: flex;
+	width: min(100%, 300px);
+	min-height: 0;
+	margin: 0;
+	padding: 0;
+	text-align: start;
+}
+.gourmeta-inner-page .col-wrapper .product-list .col .product {
+	box-sizing: border-box;
+	position: relative;
+	inset: auto;
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 12px;
+	width: auto;
+	min-width: 0;
+	margin: 0;
+	padding: clamp(17px, 3vw, 28px);
+	background: var(--gh-content-surface);
+	border: 1px solid var(--gh-line-on-light);
+	border-radius: var(--gh-content-radius);
+	box-shadow: var(--gh-content-shadow);
+}
+.gourmeta-inner-page .col-wrapper .product-list .product > a:has(img) {
+	display: grid;
+	place-items: center;
+	align-self: stretch;
+	min-height: 170px;
+	padding: 12px;
+	background: var(--gh-paper);
+	border-radius: 12px 40px 12px 12px;
+}
+.gourmeta-inner-page .col-wrapper .product-list .product img {
+	width: auto;
+	max-height: 230px;
+	object-fit: contain;
+}
+.gourmeta-inner-page .col-wrapper .product-list .product > :is(p, h3) { margin: 0; }
+.gourmeta-inner-page .col-wrapper .product-list .product > p:empty { display: none; }
+.gourmeta-inner-page .col-wrapper .product-list .product > label {
+	margin: auto 0 0;
+	font-size: .84rem;
+	color: var(--gh-muted);
+}
+.gourmeta-inner-page .col-wrapper .product-list .product > a.button {
+	margin: 0;
+	opacity: 1;
+}
+
+.gourmeta-inner-page .gh-instant-coffee {
+	container-type: inline-size;
+	display: grid;
+	grid-template-columns: minmax(0, 2.2fr) minmax(192px, 1fr);
+	gap: clamp(12px, 2vw, 24px);
+	width: min(100%, 70rem);
+	max-width: none;
+	margin: 0 auto;
+}
+
+.gourmeta-inner-page .gh-instant-coffee > img {
+	display: block;
+	align-self: center;
+	width: 100%;
+	height: auto;
+	margin: 0;
+	border-radius: var(--gh-content-radius);
+}
+
+.gourmeta-inner-page .gh-instant-product {
+	box-sizing: border-box;
+	display: grid;
+	align-content: center;
+	justify-items: center;
+	gap: clamp(12px, 1.5cqw, 18px);
+	min-width: 0;
+	margin: 0;
+	padding: clamp(14px, 2.5cqw, 28px);
+	border: 1px solid var(--gh-line-on-light);
+	border-radius: var(--gh-content-radius);
+	background: var(--gh-content-surface);
+}
+
+.gourmeta-inner-page .gh-instant-product > a,
+.gourmeta-inner-page .gh-instant-product > a :is(img, strong) {
+	margin: 0;
+}
+
+.gourmeta-inner-page .gh-instant-product > a:has(img) {
+	display: block;
+	max-width: 100%;
+}
+
+.gourmeta-inner-page .gh-instant-product > a img {
+	display: block;
+	width: auto;
+	height: clamp(9rem, 27cqw, 15.875rem);
+	object-fit: contain;
+}
+
+@media (max-width: 620px) {
+	.gourmeta-inner-page .gh-instant-coffee {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.gourmeta-inner-page .gh-instant-product > a img {
+		height: clamp(11rem, 55cqw, 15.875rem);
+	}
+}
+
+.gourmeta-inner-page .gh-jacobs-gallery {
+	clear: both;
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: clamp(10px, 1.5vw, 18px);
+	max-width: 54rem;
+	margin: 0 0 clamp(16px, 2vw, 26px);
+	padding-top: clamp(16px, 2vw, 26px);
+}
+
+.gourmeta-inner-page .gh-jacobs-gallery > figure {
+	box-sizing: border-box;
+	isolation: isolate;
+	display: grid;
+	align-content: start;
+	justify-items: center;
+	gap: 10px;
+	min-width: 0;
+	margin: 0;
+	padding: clamp(10px, 1.5vw, 18px);
+	border: 1px solid var(--gh-line-on-light);
+	border-radius: 14px;
+	background: var(--gh-paper);
+	text-align: center;
+}
+
+.gourmeta-inner-page .gh-jacobs-gallery > figure > img {
+	display: block;
+	width: auto;
+	height: clamp(8rem, 23vw, 11.5rem);
+	max-width: 100%;
+	margin: 0;
+	object-fit: contain;
+	mix-blend-mode: multiply;
+}
+
+.gourmeta-inner-page .gh-jacobs-gallery figcaption {
+	margin: 0;
+	color: var(--gh-ink);
+	font: 650 .85rem/1.35 var(--gh-font);
+}
+
+@media (max-width: 620px) {
+	.gourmeta-inner-page .gh-jacobs-gallery {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+.gourmeta-inner-page .gh-espresso-groups {
+	--gh-espresso-column: 50cqw;
+	--gh-espresso-inset: clamp(16px, 3cqw, 28px);
+	box-sizing: border-box;
+	container-type: inline-size;
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	width: min(100%, 60rem);
+	margin-inline: auto;
+	border: 1px solid var(--gh-line-on-light);
+	border-radius: var(--gh-content-radius);
+	background: var(--gh-content-surface);
+	box-shadow: var(--gh-content-shadow);
+}
+
+.gourmeta-inner-page .gh-espresso-group {
+	display: grid;
+	grid-row: 1 / span 2;
+	grid-template-rows: subgrid;
+	min-width: 0;
+}
+
+.gourmeta-inner-page .gh-espresso-group + .gh-espresso-group {
+	border-inline-start: 1px solid var(--gh-line-on-light);
+}
+
+.gourmeta-inner-page .gh-espresso-group .gh-espresso-heading {
+	margin: 0;
+	padding: clamp(14px, 2.4cqw, 22px) var(--gh-espresso-inset);
+	border-bottom: 1px solid var(--gh-line-on-light);
+	font-size: clamp(1.13rem, calc(var(--gh-espresso-column) * .056), 1.55rem);
+}
+
+.gourmeta-inner-page .col-wrapper .gh-espresso-group .product-list {
+	grid-template-columns: minmax(0, 1fr);
+	align-content: start;
+	gap: var(--gh-espresso-inset);
+	margin: 0;
+	padding: var(--gh-espresso-inset);
+}
+
+.gourmeta-inner-page .gh-espresso-groups:not(:has(.product-list .col + .col)) .product-list {
+	align-content: stretch;
+}
+
+.gourmeta-inner-page .col-wrapper .gh-espresso-group .product-list .col {
+	width: 100%;
+}
+
+.gourmeta-inner-page .col-wrapper .gh-espresso-group .product-list .col .product {
+	align-items: stretch;
+	gap: clamp(14px, 2.1cqw, 20px);
+	padding: 0;
+	border: 0;
+	border-radius: 0;
+	background: none;
+	box-shadow: none;
+}
+
+.gourmeta-inner-page .col-wrapper .gh-espresso-group .product-list .col + .col {
+	padding-top: var(--gh-espresso-inset);
+	border-top: 1px solid var(--gh-line-on-light);
+}
+
+.gourmeta-inner-page .col-wrapper .gh-espresso-group .product-list .gh-espresso-product-image {
+	position: relative;
+	isolation: isolate;
+	height: clamp(12.5rem, calc(var(--gh-espresso-column) * .55), 16rem);
+	min-height: 0;
+	padding: 0;
+	border-radius: 12px;
+}
+
+.gourmeta-inner-page .col-wrapper .gh-espresso-group .product-list .gh-espresso-product-image img {
+	position: absolute;
+	inset: 10px;
+	width: calc(100% - 20px);
+	height: calc(100% - 20px);
+	max-height: none;
+	object-fit: contain;
+	mix-blend-mode: multiply;
+}
+
+.gourmeta-inner-page .gh-espresso-product-copy h3 {
+	margin: 0;
+	font-size: clamp(1.05rem, calc(var(--gh-espresso-column) * .05), 1.5rem);
+	overflow-wrap: anywhere;
+}
+
+.gourmeta-inner-page .gh-espresso-product-copy p {
+	margin: .65em 0 0;
+	font-size: .87rem;
+	line-height: 1.55;
+}
+
+.gourmeta-inner-page .gh-espresso-product-actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px 16px;
+	margin-top: auto;
+}
+
+.gourmeta-inner-page .col-wrapper .gh-espresso-group .product-list label {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	margin: 0;
+	font-size: .84rem;
+	color: var(--gh-muted);
+}
+
+.gourmeta-inner-page .gh-espresso-product-actions input {
+	margin: 0;
+}
+
+.gourmeta-inner-page .col-wrapper .gh-espresso-group .product-list .product a.button {
+	margin: 0;
+	opacity: 1;
+}
+
+@media (max-width: 720px) {
+	.gourmeta-inner-page .gh-espresso-groups {
+		--gh-espresso-column: 100cqw;
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.gourmeta-inner-page .gh-espresso-group {
+		grid-row: auto;
+		grid-template-rows: auto auto;
+	}
+
+	.gourmeta-inner-page .gh-espresso-group + .gh-espresso-group {
+		border-inline-start: 0;
+		border-block-start: 1px solid var(--gh-line-on-light);
+	}
+
+	.gourmeta-inner-page .gh-espresso-product-actions {
+		justify-content: flex-start;
+	}
+}
+
+.gourmeta-inner-page .product-toolbox {
+	box-sizing: border-box;
+	width: min(230px, 100%);
+	border: 1px solid var(--gh-line-on-dark);
+	border-radius: 12px;
+	background: var(--gh-ink-soft);
+	color: var(--gh-paper);
+}
+.gourmeta-inner-page .product-toolbox h4 { color: inherit; font: 720 .86rem/1.35 var(--gh-font); }
+.gourmeta-inner-page .product-toolbox ul { color: inherit; font: inherit; }
+
+.gourmeta-inner-page .compare-nav .row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+.gourmeta-inner-page .compare-nav .comparison-button-holder { float: none; margin: 0; padding: 0; }
+.gourmeta-inner-page .compare-machines.col-wrapper {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(220px, 1fr));
+	overflow-x: auto;
+	padding-bottom: 8px;
+	gap: clamp(10px, 2vw, 22px);
+}
+.gourmeta-inner-page .compare-machines::before,
+.gourmeta-inner-page .compare-machines::after { display: none; }
+.gourmeta-inner-page .compare-machines .col:nth-child(n) {
+	width: auto;
+	margin: 0;
+	padding: clamp(8px, 1.7vw, 20px);
+	border: 1px solid var(--gh-line-on-light);
+	border-radius: var(--gh-content-radius);
+	background: var(--gh-content-surface);
+}
+.gourmeta-inner-page .compare-machines .col .machine-name {
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 6px;
+	width: 100%;
+	height: auto;
+	min-height: 44px;
+	margin: 0 0 12px;
+	padding: 8px;
+	border-radius: 9px;
+	background: var(--gh-sand);
+}
+.gourmeta-inner-page .compare-machines .machine-name h2,
+.gourmeta-inner-page .compare-machines .machine-intro h2 {
+	margin: 0;
+	width: auto;
+	font-family: var(--gh-font);
+	font-size: clamp(.84rem, 1.45vw, 1.28rem);
+	line-height: 1.2;
+}
+.gourmeta-inner-page .compare-machines .machine-intro {
+	border-color: var(--gh-line-on-light);
+}
+.gourmeta-inner-page .compare-machines .machine-details > li {
+	margin: 0;
+	padding: 9px 0;
+	border-color: var(--gh-line-on-light);
+}
+.gourmeta-inner-page .compare-machines .machine-details h3 {
+	position: static;
+	padding: 0;
+	background: none;
+	font-size: .82rem;
+}
+.gourmeta-inner-page .compare-machines .machine-details .value { font-size: .85rem; }
+
+.gourmeta-inner-page :is(.gourmeta-product-intro, .gourmeta-product-description, .gourmeta-product-specifications) {
+	box-sizing: border-box;
+}
+.gourmeta-inner-page :is(.gourmeta-product-intro, .gourmeta-product-description),
+.gourmeta-inner-page.gourmeta-product-editor .is-root-container {
+	max-width: 60rem;
+}
+.gourmeta-inner-page .gourmeta-product-intro {
+	display: grid;
+	grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+	gap: var(--gh-content-gap);
+	align-items: center;
+	padding: clamp(18px, 4vw, 56px);
+	background: var(--gh-heading-bg);
+	color: var(--gh-paper);
+	border-radius: var(--gh-content-radius);
+	box-shadow: var(--gh-content-shadow);
+}
+.gourmeta-inner-page .gourmeta-product-intro::before,
+.gourmeta-inner-page .gourmeta-product-intro::after { display: none; }
+.gourmeta-inner-page .gourmeta-product-intro .image-holder {
+	display: grid;
+	place-items: center;
+	min-height: 240px;
+	min-width: 0;
+	padding: 16px;
+	margin: 0;
+	background: var(--gh-paper);
+	border-radius: 14px clamp(24px, 5vw, 65px) 14px 14px;
+}
+.gourmeta-inner-page .gourmeta-product-intro .image-holder img {
+	display: block;
+	width: auto;
+	max-height: 470px;
+	object-fit: contain;
+}
+.gourmeta-inner-page .gourmeta-product-intro :is(.intro, h1) { color: var(--gh-paper); }
+.gourmeta-inner-page .gourmeta-product-intro h1 {
+	margin-bottom: clamp(12px, 2vw, 25px);
+	padding: 0;
+	background: none;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+	font-size: clamp(1.9rem, 4vw, 3.5rem);
+	text-align: start;
+	text-wrap: wrap;
+}
+.gourmeta-inner-page .gourmeta-product-intro .intro { line-height: 1.55; letter-spacing: normal; }
+.gourmeta-inner-page .gourmeta-product-intro .call-to-action {
+	padding: 0;
+	margin: 0;
+	background: none;
+	border: 0;
+	box-shadow: none;
+}
+.gourmeta-inner-page .gourmeta-product-intro .call-to-action em { display: block; margin-bottom: 10px; }
+.gourmeta-inner-page :is(.gourmeta-product-description, .gourmeta-product-specifications) .nav.tabs {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin: 0 0 var(--gh-content-gap);
+	padding: 0;
+	background: none;
+	border: 0;
+}
+.gourmeta-inner-page .gourmeta-product-description .nav.tabs li { float: none; margin: 0; padding: 0; border: 0; background: none; }
+.gourmeta-inner-page .gourmeta-product-description .nav.tabs a,
+.gourmeta-inner-page .gourmeta-product-specifications summary {
+	display: inline-block;
+	box-sizing: border-box;
+	height: auto;
+	padding: 10px 15px;
+	border: 1px solid var(--gh-line-on-light);
+	border-radius: 10px;
+	background: var(--gh-content-surface);
+	color: var(--gh-ink);
+	font: 730 .87rem/1.3 var(--gh-font);
+}
+.gourmeta-inner-page .gourmeta-product-description .nav.tabs .ui-tabs-selected a { background: var(--gh-accent); }
+.gourmeta-inner-page .gourmeta-product-description .tab-nav { background: none; }
+.gourmeta-inner-page .gourmeta-product-description .machine-properties-holder {
+	width: 100%;
+	margin: 0;
+	float: none;
+	box-shadow: none;
+}
+.gourmeta-inner-page .gourmeta-product-description :is(#description, #specifications, .gourmeta-static-preview:has(.specifications)) {
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 100%;
+	padding: var(--gh-content-gap);
+	background: var(--gh-content-surface);
+	border: 1px solid var(--gh-line-on-light);
+	border-radius: var(--gh-content-radius);
+	box-shadow: var(--gh-content-shadow);
+}
+.gourmeta-inner-page .gourmeta-product-description .tab-bottom { margin: var(--gh-content-gap) 0 0; }
+.gourmeta-inner-page .gourmeta-product-description .tab-bottom-left { width: 100%; float: none; }
+.gourmeta-inner-page .gourmeta-product-description .tabs-holder { width: 100%; }
+
+.gourmeta-inner-page h2.gourmeta-spec-title {
+	margin: 1.5rem 0 .7rem;
+	font: 745 1.25rem/1.2 var(--gh-font);
+	color: var(--gh-ink);
+}
+
+.gourmeta-inner-page .gourmeta-spec-table > table {
+	box-sizing: border-box;
+	width: 100%;
+	margin: 0;
+	table-layout: fixed;
+	border-collapse: separate;
+	border-spacing: 0;
+	overflow: hidden;
+	border: 1px solid var(--gh-line-on-light);
+	border-radius: 12px;
+	background: var(--gh-paper);
+	color: var(--gh-ink);
+	font: 500 .92rem/1.45 var(--gh-font);
+}
+
+.gourmeta-inner-page .gourmeta-spec-table > table :is(th, td) {
+	box-sizing: border-box;
+	width: auto;
+	padding: .7em clamp(9px, 1.5vw, 16px);
+	border: 0;
+	color: inherit;
+	font: inherit;
+	text-align: start;
+	vertical-align: middle;
+	overflow-wrap: anywhere;
+}
+
+.gourmeta-inner-page .gourmeta-spec-table > table thead th {
+	border-bottom: 1px solid var(--gh-line-on-dark);
+	background: var(--gh-ink-soft);
+	color: var(--gh-paper);
+	font-weight: 730;
+}
+
+.gourmeta-inner-page .gourmeta-spec-table > table thead th:first-child {
+	width: 62%;
+}
+
+.gourmeta-inner-page .gourmeta-spec-table > table tbody tr:nth-child(even) {
+	background: var(--gh-content-surface);
+}
+
+.gourmeta-inner-page .gourmeta-spec-table > table tbody tr + tr > :is(th, td) {
+	border-block-start: 1px solid var(--gh-line-on-light);
+}
+
+.gourmeta-inner-page .gourmeta-spec-table > table tr > :is(th, td) + :is(th, td) {
+	border-inline-start: 1px solid var(--gh-line-on-light);
+}
+
+.gourmeta-inner-page .gourmeta-spec-table > table thead tr > th + th {
+	border-inline-start-color: var(--gh-line-on-dark);
+}
+
+.gourmeta-inner-page .gourmeta-spec-table > table tbody tr > :first-child {
+	font-weight: 620;
+}
+
+.gourmeta-inner-page .col-wrapper:is(.gh-juice-page, .gh-tea-page, .gh-related-page) {
+	max-width: 64rem;
+}
+
+.gourmeta-inner-page :is(.gh-juice-page, .gh-tea-page, .gh-related-page, .gh-reviews-page) > .row > .col {
+	margin-inline: 0;
+}
+
+.gourmeta-inner-page :is(.gh-juice-page, .gh-tea-page, .gh-related-page, .gh-reviews-page) h1,
+.gourmeta-inner-page .gh-juice-page .gh-juice-gallery {
+	width: 100%;
+	max-width: none;
+	margin-inline: 0;
+}
+
+.gourmeta-inner-page :is(.gh-juice-page, .gh-tea-page, .gh-related-page, .gh-reviews-page) h1 {
+	padding: clamp(18px, 3.4vw, 48px);
+}
+
+.gourmeta-inner-page .gh-juice-gallery {
+	container-type: inline-size;
+	display: grid;
+	grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+	gap: clamp(12px, 2vw, 24px);
+	margin-bottom: var(--gh-content-gap);
+}
+
+.gourmeta-inner-page .gh-juice-gallery > img {
+	box-sizing: border-box;
+	display: block;
+	width: 100%;
+	height: clamp(170px, 32cqw, 330px);
+	margin: 0;
+	border: 1px solid var(--gh-line-on-light);
+	border-radius: var(--gh-content-radius);
+	background: var(--gh-paper);
+	object-fit: contain;
+}
+
+.gourmeta-inner-page .gh-juice-gallery > .gh-juice-portrait {
+	object-fit: cover;
+	object-position: center 27%;
+}
+
+.gourmeta-inner-page .gh-juice-page .col > p {
+	max-width: 72ch;
+	margin-inline: 0;
+}
+
+.gourmeta-inner-page .gourmeta-spec-table.gh-juice-specs {
+	max-width: 42rem;
+	margin: 0;
+}
+
+.gourmeta-inner-page .gh-juice-specs > table {
+	table-layout: auto;
+}
+
+.gourmeta-inner-page .gh-juice-specs > table thead th:first-child {
+	width: auto;
+}
+
+.gourmeta-inner-page .gh-juice-specs > table thead th:nth-child(2) {
+	width: clamp(3.2rem, 14%, 5.5rem);
+}
+
+.gourmeta-inner-page .gh-juice-specs > table :is(th, td) {
+	padding: .45em clamp(7px, 1.2vw, 12px);
+}
+
+.gourmeta-inner-page .gh-juice-specs > table :is(th, td):nth-child(2) {
+	text-align: center;
+}
+
+.gourmeta-inner-page .gh-juice-specs > table tbody td:nth-child(2) {
+	white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+	.gourmeta-inner-page .gh-juice-gallery {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.gourmeta-inner-page .gh-juice-gallery > img {
+		height: auto;
+	}
+
+	.gourmeta-inner-page .gh-juice-gallery > .gh-juice-portrait {
+		aspect-ratio: 4 / 3;
+	}
+
+	.gourmeta-inner-page .gh-juice-specs > table {
+		font-size: .85rem;
+	}
+
+	.gourmeta-inner-page .gh-juice-specs > table thead th:nth-child(3) {
+		width: 43%;
+	}
+}
+
+.gourmeta-inner-page .gh-juices-page :is(.gh-juices-intro, .gh-juices-serving) {
+	container-type: inline-size;
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+	width: 100%;
+	max-width: none;
+	margin: 0;
+	border: 1px solid var(--gh-line-on-light);
+	border-radius: var(--gh-content-radius);
+	background: var(--gh-content-surface);
+	box-shadow: var(--gh-content-shadow);
+}
+
+.gourmeta-inner-page :is(.gh-juices-page, .gh-tea-page) :is(.gh-juices-picture, .gh-tea-picture) {
+	position: relative;
+	min-width: 0;
+	min-height: 20rem;
+	margin: 0;
+	overflow: hidden;
+	border-radius: var(--gh-content-radius);
+	background: var(--gh-ink-soft);
+}
+
+.gourmeta-inner-page :is(.gh-juices-picture, .gh-tea-picture, .gh-related-picture) > img {
+	position: absolute;
+	inset: 0;
+	display: block;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	border-radius: 0;
+	object-fit: cover;
+}
+
+.gourmeta-inner-page .gh-juices-page .gh-juices-copy {
+	box-sizing: border-box;
+	align-self: center;
+	min-width: 0;
+	margin: 0;
+	padding: clamp(20px, 3.7cqw, 38px);
+}
+
+.gourmeta-inner-page .gh-juices-copy h2 {
+	margin: 0 0 .65em;
+	font-size: clamp(1.45rem, 3.1cqw, 2.15rem);
+	line-height: 1.16;
+}
+
+.gourmeta-inner-page .gh-juices-copy > p {
+	margin: 0 0 .8em;
+	line-height: 1.55;
+}
+
+.gourmeta-inner-page .gh-juices-copy a.button {
+	margin-top: .35em;
+}
+
+.gourmeta-inner-page .gh-juices-page .gh-juices-range {
+	width: 100%;
+	max-width: none;
+	margin: clamp(28px, 5vw, 60px) 0;
+}
+
+.gourmeta-inner-page .gh-juices-page .gh-juices-range h2 {
+	margin-bottom: .45em;
+}
+
+.gourmeta-inner-page .gh-juices-range > p {
+	max-width: 68ch;
+	margin: 0 0 1em;
+}
+
+.gourmeta-inner-page .gh-juices-page .gh-juices-products {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: clamp(12px, 2vw, 22px);
+	width: 100%;
+	max-width: none;
+	margin: 0;
+}
+
+.gourmeta-inner-page .gh-juices-products > figure {
+	box-sizing: border-box;
+	display: grid;
+	grid-template-rows: minmax(0, 1fr) auto;
+	justify-items: center;
+	gap: 12px;
+	min-width: 0;
+	margin: 0;
+	padding: clamp(14px, 2vw, 24px);
+	border: 1px solid var(--gh-line-on-light);
+	border-radius: var(--gh-content-radius);
+	background: radial-gradient(ellipse at 50% 45%, var(--gh-sand), var(--gh-content-surface) 76%);
+	text-align: center;
+}
+
+.gourmeta-inner-page .gh-juices-products > figure > img {
+	display: block;
+	width: 100%;
+	height: clamp(9rem, 23vw, 14rem);
+	margin: 0;
+	border-radius: 0;
+	object-fit: contain;
+}
+
+.gourmeta-inner-page .gh-juices-products figcaption {
+	margin: 0;
+	color: var(--gh-ink);
+	font: 730 1rem/1.35 var(--gh-font);
+}
+
+.gourmeta-inner-page .gh-juices-page .gh-juices-serving {
+	grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+	background: var(--gh-heading-bg);
+	color: var(--gh-paper);
+}
+
+.gourmeta-inner-page .gh-juices-serving .gh-juices-copy :is(h2, h3) {
+	color: var(--gh-paper);
+}
+
+.gourmeta-inner-page .gh-juices-serving .gh-juices-copy h3 {
+	margin: 1.25em 0 .65em;
+}
+
+.gourmeta-inner-page .gh-juices-serving .gourmeta-spec-table {
+	margin: 0;
+}
+
+.gourmeta-inner-page .gh-juices-serving .gourmeta-spec-table > table :is(th, td) {
+	padding: .5em clamp(8px, 1.1vw, 14px);
+}
+
+@media (max-width: 700px) {
+	.gourmeta-inner-page .gh-juices-page :is(.gh-juices-intro, .gh-juices-serving) {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.gourmeta-inner-page .gh-juices-page .gh-juices-picture {
+		min-height: 0;
+		aspect-ratio: 4 / 3;
+	}
+
+	.gourmeta-inner-page .gh-juices-serving .gh-juices-picture {
+		aspect-ratio: 1;
+	}
+}
+
+@media (max-width: 520px) {
+	.gourmeta-inner-page .gh-juices-page .gh-juices-products {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
+
+.gourmeta-inner-page .gh-tea-page .gh-tea-showcase {
+	container-type: inline-size;
+	display: grid;
+	grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+	gap: clamp(16px, 2.3vw, 28px);
+	width: 100%;
+	max-width: none;
+	margin: 0;
+}
+
+.gourmeta-inner-page .gh-tea-picture {
+	box-shadow: var(--gh-content-shadow);
+}
+
+.gourmeta-inner-page .gh-tea-page :is(.gh-tea-catalog, .gh-tea-products) {
+	min-width: 0;
+	max-width: none;
+	margin: 0;
+}
+
+.gourmeta-inner-page .gh-tea-catalog h2 {
+	margin: 0 0 .6em;
+	font-size: clamp(1.45rem, 3.1cqw, 2.15rem);
+	text-wrap: balance;
+}
+
+.gourmeta-inner-page .gh-tea-products {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: clamp(12px, 1.8vw, 18px);
+}
+
+.gourmeta-inner-page .gh-tea-products > .gh-tea-product {
+	box-sizing: border-box;
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+	align-items: start;
+	justify-items: center;
+	gap: clamp(12px, 1.5cqw, 16px);
+	min-width: 0;
+	margin: 0;
+	padding: clamp(14px, 1.8cqw, 22px);
+	border: 1px solid var(--gh-line-on-light);
+	border-radius: var(--gh-content-radius);
+	background: radial-gradient(ellipse at 50% 35%, var(--gh-sand), var(--gh-content-surface) 78%);
+	text-align: center;
+}
+
+.gourmeta-inner-page .gh-tea-product > :is(a, p),
+.gourmeta-inner-page .gh-tea-product > a :is(img, strong) {
+	margin: 0;
+}
+
+.gourmeta-inner-page .gh-tea-product > a:has(img) {
+	display: block;
+	width: 100%;
+}
+
+.gourmeta-inner-page .gh-tea-product img {
+	display: block;
+	width: 100%;
+	height: clamp(9rem, 18.5cqw, 12rem);
+	border-radius: 0;
+	object-fit: contain;
+}
+
+.gourmeta-inner-page .gh-tea-product > p {
+	color: var(--gh-muted);
+	font-size: .87rem;
+	line-height: 1.45;
+}
+
+@media (max-width: 840px) {
+	.gourmeta-inner-page .gh-tea-page .gh-tea-showcase {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.gourmeta-inner-page .gh-tea-page .gh-tea-picture {
+		min-height: 0;
+		aspect-ratio: 3 / 2;
+	}
+}
+
+@media (max-width: 520px) {
+	.gourmeta-inner-page .gh-tea-products {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.gourmeta-inner-page .gh-tea-product img {
+		height: clamp(10rem, 48cqw, 12rem);
+	}
+}
+
+.gourmeta-inner-page .gh-related-page :is(.gh-related-products, .gh-related-feature) {
+	display: grid;
+	gap: clamp(12px, 1.7vw, 20px);
+	width: 100%;
+	max-width: none;
+	margin: 0;
+}
+
+.gourmeta-inner-page .gh-related-products {
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.gourmeta-inner-page .gh-related-products > .gh-related-product {
+	box-sizing: border-box;
+	isolation: isolate;
+	display: grid;
+	grid-template-rows: 1fr auto;
+	justify-items: center;
+	gap: 14px;
+	min-width: 0;
+	margin: 0;
+	padding: clamp(12px, 1.8vw, 22px);
+	border: 1px solid var(--gh-line-on-light);
+	border-radius: var(--gh-content-radius);
+	background: var(--gh-content-surface);
+	text-align: center;
+}
+
+.gourmeta-inner-page .gh-related-product > a,
+.gourmeta-inner-page .gh-related-product > a :is(img, strong) {
+	margin: 0;
+}
+
+.gourmeta-inner-page .gh-related-product > a:has(img) {
+	display: block;
+	width: 100%;
+}
+
+.gourmeta-inner-page .gh-related-product img {
+	display: block;
+	width: 100%;
+	height: clamp(9rem, 18vw, 13rem);
+	border-radius: 0;
+	object-fit: contain;
+	mix-blend-mode: multiply;
+}
+
+.gourmeta-inner-page .col-wrapper .gh-related-product > a.button {
+	width: 100%;
+	min-height: 58px;
+	padding-inline: 10px;
+	text-wrap: balance;
+}
+
+.gourmeta-inner-page .gh-related-feature {
+	grid-template-areas: "lead copy" "detail copy";
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+	grid-template-rows: minmax(14rem, 1fr) minmax(10rem, .85fr);
+}
+
+.gourmeta-inner-page .gh-related-feature > .gh-related-picture {
+	position: relative;
+	grid-area: lead;
+	min-width: 0;
+	max-width: none;
+	margin: 0;
+	overflow: hidden;
+	border-radius: var(--gh-content-radius);
+	background: var(--gh-ink-soft);
+}
+
+.gourmeta-inner-page .gh-related-feature > .gh-related-picture-detail {
+	grid-area: detail;
+}
+
+.gourmeta-inner-page .gh-related-feature > .gh-related-copy {
+	box-sizing: border-box;
+	display: grid;
+	grid-area: copy;
+	align-content: center;
+	min-width: 0;
+	max-width: none;
+	margin: 0;
+	padding: clamp(18px, 3.1vw, 38px);
+	border: 1px solid var(--gh-line-on-light);
+	border-radius: var(--gh-content-radius);
+	background: var(--gh-content-surface);
+	box-shadow: var(--gh-content-shadow);
+}
+
+.gourmeta-inner-page .gh-related-copy h2 {
+	margin: 0 0 .55em;
+	font-size: clamp(1.4rem, 2.5vw, 2rem);
+	line-height: 1.17;
+}
+
+.gourmeta-inner-page .gh-related-copy p {
+	margin: 0 0 1em;
+	line-height: 1.55;
+}
+
+.gourmeta-inner-page .gh-related-copy ul {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 8px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.gourmeta-inner-page .gh-related-copy li {
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	min-width: 0;
+	min-height: 42px;
+	margin: 0;
+	padding: 8px 10px;
+	border: 1px solid var(--gh-line-on-light);
+	border-radius: 9px;
+	background: var(--gh-sand);
+	font-size: .85rem;
+	line-height: 1.3;
+}
+
+.gourmeta-inner-page .gh-related-copy li::before {
+	display: none;
+}
+
+@media (max-width: 900px) {
+	.gourmeta-inner-page .gh-related-products {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (max-width: 760px) {
+	.gourmeta-inner-page .gh-related-feature {
+		grid-template-areas: "lead" "copy" "detail";
+		grid-template-columns: minmax(0, 1fr);
+		grid-template-rows: auto;
+	}
+
+	.gourmeta-inner-page .gh-related-feature > .gh-related-picture {
+		aspect-ratio: 3 / 2;
+	}
+
+	.gourmeta-inner-page .gh-related-feature > .gh-related-picture-detail {
+		aspect-ratio: 16 / 9;
+	}
+}
+
+@media (max-width: 460px) {
+	.gourmeta-inner-page .col-wrapper .gh-related-product > a.button {
+		min-height: 64px;
+		padding: 7px;
+		font-size: .78rem;
+	}
+
+	.gourmeta-inner-page .gh-related-copy ul {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
+
+.gourmeta-inner-page .gourmeta-product-description .highlights {
+	box-sizing: border-box;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 110px), 1fr));
+	gap: 7px;
+	padding: 0;
+	background: none;
+}
+.gourmeta-inner-page .gourmeta-product-description .highlights li {
+	width: auto;
+	height: auto;
+	float: none;
+	margin: 0;
+	padding: 6px;
+	background: var(--gh-sand);
+	border-radius: 8px;
+}
+.gourmeta-inner-page .gourmeta-product-description .highlights :is(strong, dfn, em) {
+	color: var(--gh-ink);
+	font-family: var(--gh-font);
+}
+
+.gourmeta-inner-page .col-wrapper .quote-form {
+	margin-inline: 0;
+	padding-inline: 0;
+	background: none;
+}
+.gourmeta-inner-page .col-wrapper .quote-form-head { padding: 0; background: none; }
+.gourmeta-inner-page .col-wrapper .quote-form-selection .col {
+	width: auto;
+	max-width: 100%;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+.gourmeta-inner-page .col-wrapper .wpcf7-form {
+	box-sizing: border-box;
+	width: min(100%, 52rem);
+	padding: clamp(16px, 4vw, 42px);
+	background: var(--gh-content-surface);
+	border: 1px solid var(--gh-line-on-light);
+	border-radius: var(--gh-content-radius);
+	box-shadow: var(--gh-content-shadow);
+}
+.gourmeta-inner-page .col-wrapper .form-item { margin: 0 0 .85em; }
+.gourmeta-inner-page .col-wrapper .form-item :is(label, legend, .wpcf7-form-control-wrap) {
+	box-sizing: border-box;
+	display: block;
+	width: auto;
+	float: none;
+	margin: 0;
+	padding: 0;
+	font: inherit;
+}
+.gourmeta-inner-page .col-wrapper :is(.form-item, .wpcf7-form) :is(input:not([type="hidden"], [type="checkbox"], [type="radio"], [type="submit"]), select, textarea) {
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 100%;
+	float: none;
+	margin: 5px 0 0;
+	padding: 11px 13px;
+	border: 1px solid var(--gh-line-on-light);
+	border-radius: 10px;
+	background: var(--gh-paper);
+	color: var(--gh-ink);
+	font: inherit;
+}
+.gourmeta-inner-page .col-wrapper input:is([type="checkbox"], [type="radio"]) {
+	display: inline-block;
+	width: 1rem;
+	height: 1rem;
+	float: none;
+	margin: 0 7px 0 0;
+	opacity: 1;
+	vertical-align: middle;
+	accent-color: #765a46;
+}
+.gourmeta-inner-page .col-wrapper input:is([type="checkbox"], [type="radio"]) + :is(span, label)::before {
+	display: none;
+}
+
+.gourmeta-inner-page .col-wrapper .col6of6 > :is(div, p)[id^="sad654"]:empty {
+	display: none;
+}
+
+@media (max-width: 660px) {
+	.gourmeta-inner-page .breadcrumb-container { flex-wrap: wrap; gap: 0 8px; }
+	.gourmeta-inner-page .breadcrumb-container nav:has(li) { flex-basis: 100%; }
+	.gourmeta-inner-page .col-wrapper .product-list .col { justify-self: center; }
+	.gourmeta-inner-page .col-wrapper .row:has(> .col-3of6 + .col-2of6),
+	.gourmeta-inner-page .gourmeta-product-intro { grid-template-columns: minmax(0, 1fr); }
+	.gourmeta-inner-page .col-wrapper .row:has(> .col-3of6 + .col-2of6) .col-2of6 img { max-height: 260px; }
+	.gourmeta-inner-page .gourmeta-product-intro .image-holder { min-height: 0; }
+	.gourmeta-inner-page .gourmeta-product-intro .image-holder img { max-height: 275px; }
+	.gourmeta-inner-page .compare-machines .col .machine-name { flex-wrap: wrap; }
+}
+@media print {
+	.gourmeta-inner-page :is(.gourmeta-masthead, .breadcrumb-wrapper, .gh-footer, .gh-back-to-top) { display: none; }
+	.gourmeta-inner-page :is(.col-wrapper, .gourmeta-product-description, .editor-visual-editor__post-title-wrapper) h1 {
+		background: none;
+		color: var(--gh-ink);
+		border: 0;
+		box-shadow: none;
+	}
+}
+
+.gourmeta-inner-page .gourmeta-product-intro-text {
+	grid-template-columns: minmax(0, 1fr);
+}
+
+.gourmeta-inner-page .gourmeta-product-description .tab-nav :is(a.return, a.readmore) {
+	background: none;
+}
+
+.gourmeta-inner-page .gourmeta-product-description .ui-tabs-hide { display: none; }
+
+.gourmeta-inner-page .gourmeta-product-description .wp-video {
+	max-width: 100%;
+	border-radius: 12px;
+	overflow: hidden;
+}
+.gourmeta-inner-page .gourmeta-product-description .wp-video video {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+.gourmeta-inner-page .col-wrapper .call-button-holder {
+	float: none;
+	max-width: none;
+	color: var(--gh-light-muted);
+	text-align: left;
+}
+.gourmeta-inner-page .col-wrapper .call-button-holder p { opacity: 1; }
+.gourmeta-inner-page .col-wrapper :where(.col6of6, .col-6of6) > p:not(.wp-block, :has(img, iframe)),
+.gourmeta-inner-page .gourmeta-product-description #description > :is(p, ul, ol) {
+	max-width: 72ch;
+}
+.gourmeta-inner-page .col-wrapper .call-to-action em {
+	font-size: clamp(1rem, 1.8vw, 1.35rem);
+	line-height: 1.35;
+	font-style: normal;
+	font-weight: 680;
+}
+.gourmeta-inner-page .col-wrapper.call-to-action,
+.gourmeta-inner-page .col-wrapper .col-wrapper.call-to-action {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px 20px;
+}
+body.gourmeta-inner-page.gh-photos-animated { overflow-x: clip; }
+
+
+.gourmeta-inner-page:has(.gh-about-tools, .gh-about-story) {
+	--gh-about-story-width: 51rem;
+}
+
+.gourmeta-inner-page .gh-about-tools .breadcrumb-container {
+	width: min(calc(100% - 2 * var(--gh-edge)), var(--gh-about-story-width));
+	padding-block: 8px;
+}
+
+.gourmeta-inner-page .gh-about-tools .gh-about-print {
+	box-sizing: border-box;
+	display: inline-flex;
+	align-items: center;
+	gap: 9px;
+	min-height: 44px;
+	margin-inline-start: auto;
+	padding: 8px 14px;
+	border: 1px solid var(--gh-line-on-light);
+	border-radius: 11px;
+	background: var(--gh-content-surface);
+	color: var(--gh-ink);
+	font: 700 .76rem/1.25 var(--gh-font);
+	text-align: left;
+	cursor: pointer;
+}
+
+.gourmeta-inner-page .gh-about-tools .gh-about-print:hover {
+	background: var(--gh-accent);
+}
+
+.gourmeta-inner-page .gh-about-print-icon {
+	position: relative;
+	flex: 0 0 17px;
+	box-sizing: border-box;
+	height: 11px;
+	margin-block: 4px;
+	border: 1.5px solid currentColor;
+	border-radius: 3px;
+}
+
+.gourmeta-inner-page .gh-about-print-icon::before,
+.gourmeta-inner-page .gh-about-print-icon::after {
+	position: absolute;
+	right: 3px;
+	left: 3px;
+	box-sizing: border-box;
+	height: 6px;
+	border: 1.5px solid currentColor;
+	background: inherit;
+	content: "";
+}
+
+.gourmeta-inner-page .gh-about-print-icon::before {
+	top: -5px;
+	border-bottom: 0;
+	border-radius: 1.5px 1.5px 0 0;
+}
+
+.gourmeta-inner-page .gh-about-print-icon::after {
+	bottom: -4px;
+	border-radius: 1.5px;
+	background: var(--gh-content-surface);
+}
+
+.gourmeta-inner-page .gh-about-print:hover .gh-about-print-icon::after {
+	background: var(--gh-accent);
+}
+
+.gourmeta-inner-page .gh-about > .row > .col {
+	margin-inline: 0;
+}
+
+.gourmeta-inner-page .gh-about .gh-about-story {
+	width: min(100%, var(--gh-about-story-width));
+	margin: 0 auto;
+	padding-top: clamp(12px, 2vw, 28px);
+}
+
+.gourmeta-inner-page .gh-about h1 {
+	width: fit-content;
+	max-width: 100%;
+	margin: 0 auto clamp(26px, 5vw, 66px);
+	padding: clamp(15px, 2.3vw, 32px) clamp(20px, 3.3vw, 48px);
+}
+
+.gourmeta-inner-page .gh-about .gh-about-copy {
+	max-width: 66ch;
+	font-size: clamp(1.0625rem, 1.45vw, 1.25rem);
+	line-height: 1.8;
+}
+
+.gourmeta-inner-page .gh-about .gh-about-copy p {
+	margin: 0 0 1.25em;
+}
+
+.gourmeta-inner-page .gh-about .gh-about-copy p:last-child {
+	margin-bottom: 0;
+}
+
+.gourmeta-inner-page .gh-about .gh-about-copy .gh-about-lead {
+	font-size: clamp(1.25rem, 2vw, 1.75rem);
+	font-weight: 650;
+	line-height: 1.5;
+	letter-spacing: -.025em;
+}
+
+.gourmeta-inner-page .gh-about .gh-about-partners {
+	box-sizing: border-box;
+	width: min(100%, 60rem);
+	margin: clamp(50px, 7vw, 94px) auto clamp(48px, 6vw, 80px);
+	text-align: center;
+}
+
+.gourmeta-inner-page .gh-about .gh-about-partners h2 {
+	margin-bottom: clamp(18px, 2.5vw, 34px);
+}
+
+.gourmeta-inner-page :is(.gh-about-social, .gh-social-section) {
+	width: min(100%, 40rem);
+	margin: 0 auto clamp(42px, 6vw, 82px);
+	text-align: center;
+}
+
+.gourmeta-inner-page :is(.gh-about-social, .gh-social-section) h2 {
+	margin-bottom: clamp(14px, 2.5vw, 26px);
+}
+
+.gourmeta-inner-page :is(.gh-about-social-links, .gh-social-links) {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 12px;
+}
+
+.gourmeta-inner-page :is(.gh-about-social-links, .gh-social-links) a.button {
+	min-width: 128px;
+	gap: 9px;
+}
+
+.gourmeta-inner-page :is(.gh-about-social-links, .gh-social-links) a.button > .gourmeta-edit-button-label {
+	position: static;
+	width: auto;
+	height: auto;
+	overflow: visible;
+}
+
+.gourmeta-inner-page :is(.gh-about-social-links, .gh-social-links) a.button img {
+	width: 18px;
+	height: 18px;
+	border-radius: 4px;
+}
+
+.gourmeta-inner-page .gh-social-links a.button > :is(img, .gourmeta-edit-button-label) {
+	margin: 0;
+}
+
+.gourmeta-inner-page .gh-contacts-panel {
+	max-width: none;
+}
+
+.gourmeta-inner-page .gh-contacts-panel td > p {
+	white-space: normal;
+}
+
+.gourmeta-inner-page .gh-contacts-panel .gourmeta-dynamic-preview {
+	margin: 0;
+}
+
+.gourmeta-inner-page .gh-contacts-panel iframe {
+	display: block;
+}
+
+.gourmeta-inner-page .gh-contacts-panel .gh-social-section {
+	width: auto;
+	margin: clamp(16px, 2vw, 24px) 0 0;
+	text-align: left;
+}
+
+.gourmeta-inner-page .gh-contacts-panel .gh-social-section h2 {
+	margin-bottom: 10px;
+	font-size: clamp(1.0625rem, 1.65vw, 1.3rem);
+}
+
+.gourmeta-inner-page .gh-contacts-panel .gh-social-links {
+	justify-content: flex-start;
+	margin: 0;
+}
+
+.gourmeta-inner-page .gh-contacts-panel .gh-social-links a.button {
+	color: var(--gh-ink);
+}
+
+@media (max-width: 600px) {
+	.gourmeta-inner-page .gh-contacts-panel :is(tbody, tr, td) {
+		display: block;
+	}
+}
+
+@media (max-width: 660px) {
+	.gourmeta-inner-page .gh-about .gh-about-partners {
+		width: auto;
+		margin-inline: calc(12px - var(--gh-edge));
+	}
+}
+
+.gourmeta-inner-page .gh-reviews-page {
+	container-type: inline-size;
+	width: min(calc(100% - 2 * var(--gh-edge)), 64rem);
+}
+
+.gourmeta-inner-page .gh-reviews-intro {
+	max-width: none;
+	margin: clamp(24px, 4vw, 52px) 0 clamp(20px, 3vw, 34px);
+	text-align: center;
+}
+
+.gourmeta-inner-page .gh-reviews-intro h2 {
+	margin-bottom: .35em;
+}
+
+.gourmeta-inner-page .gh-reviews-intro p {
+	margin: 0 auto;
+	max-width: 54ch;
+	color: var(--gh-muted);
+	text-wrap: pretty;
+}
+
+.gourmeta-inner-page .gh-review-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+	gap: var(--gh-content-gap);
+	max-width: none;
+	margin: 0 0 var(--gh-content-gap);
+}
+
+.gourmeta-inner-page .gh-review-card,
+.gourmeta-inner-page .gh-reviews-archive {
+	min-width: 0;
+	border: 1px solid var(--gh-line-on-light);
+	border-radius: var(--gh-content-radius);
+	box-shadow: var(--gh-content-shadow);
+	overflow: hidden;
+}
+
+.gourmeta-inner-page .gh-review-card {
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+	background: var(--gh-content-surface);
+}
+
+.gourmeta-inner-page .gh-reviews-page :is(.gh-review-card, .gh-reviews-archive) > img {
+	display: block;
+	width: 100%;
+	height: auto;
+	margin: 0;
+	border-radius: 0;
+	object-fit: cover;
+}
+
+.gourmeta-inner-page .gh-reviews-page .gh-review-card > img {
+	aspect-ratio: 7 / 5;
+	object-position: center 60%;
+}
+
+.gourmeta-inner-page .gh-review-card-copy {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	margin: 0;
+	padding: clamp(20px, 3vw, 38px);
+}
+
+.gourmeta-inner-page .gh-review-card-copy h3 {
+	margin-bottom: 0;
+	font-size: clamp(1.2rem, 1.9vw, 1.7rem);
+}
+
+.gourmeta-inner-page .gh-review-card .gh-review-quote {
+	margin: 1.1em 0 1.25em;
+	padding: .1em 0 .1em 1em;
+	border-inline-start: 3px solid var(--gh-accent);
+	font-size: clamp(1rem, 1.4vw, 1.18rem);
+	font-weight: 580;
+	line-height: 1.6;
+}
+
+.gourmeta-inner-page .gh-review-quote p {
+	margin: 0;
+	text-wrap: pretty;
+}
+
+.gourmeta-inner-page .gh-review-quote p::before,
+.gourmeta-inner-page .gh-review-quote p::after {
+	content: none;
+}
+
+.gourmeta-inner-page .gh-review-byline {
+	margin: auto 0 0;
+}
+
+.gourmeta-inner-page .gh-review-byline p {
+	margin-bottom: 0;
+}
+
+.gourmeta-inner-page .gh-review-byline p:first-child {
+	font-weight: 740;
+}
+
+.gourmeta-inner-page .gh-review-byline p + p {
+	color: var(--gh-muted);
+	font-size: .875rem;
+}
+
+.gourmeta-inner-page .gh-review-card-copy a.button {
+	margin: 1.15rem 0 0;
+}
+
+.gourmeta-inner-page .gh-reviews-page a.button > strong {
+	margin: 0;
+}
+
+.gourmeta-inner-page .gh-reviews-archive {
+	display: grid;
+	grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+	max-width: none;
+	margin: 0 0 clamp(14px, 3vw, 36px);
+	background: var(--gh-heading-bg);
+}
+
+.gourmeta-inner-page .gh-reviews-archive-copy {
+	align-self: center;
+	margin: 0;
+	padding: clamp(24px, 4vw, 50px);
+	color: var(--gh-paper);
+}
+
+.gourmeta-inner-page .gh-reviews-archive-copy h2 {
+	color: inherit;
+}
+
+.gourmeta-inner-page .gh-reviews-archive-copy a.button {
+	margin: 0;
+}
+
+.gourmeta-inner-page .gh-reviews-page .gh-reviews-archive > img {
+	height: 100%;
+	aspect-ratio: 2 / 1;
+}
+
+@container (max-width: 39rem) {
+	.gourmeta-inner-page .gh-reviews-archive {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}

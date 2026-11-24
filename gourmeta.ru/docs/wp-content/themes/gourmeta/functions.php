@@ -11,7 +11,7 @@
 	add_image_size( 'dispenser-preview', 108, 150 );
 	
 	// новые типы постов
-	new CoffeeDispensersPostType($flush_rewrite_rules);
+	$gourmeta_coffee_dispensers = new CoffeeDispensersPostType($flush_rewrite_rules);
 	new PostsPostType($flush_rewrite_rules);
 	
 	function rge_geo_setup()

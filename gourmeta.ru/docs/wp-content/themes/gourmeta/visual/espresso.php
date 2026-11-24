@@ -1,113 +1,67 @@
-
-
+<?php
+$espresso_groups = [
+	'auto' => langS( 'Автоматические', 'Automatic' ),
+	'prof' => langS( 'Профессиональные', 'Professional' ),
+];
+?>
 <div class="col-wrapper">
-    <? include get_template_directory() . '/page-templates/includes/call_feedback_col.php' ?>
+	<?php require get_template_directory() . '/page-templates/includes/call_feedback_col.php'; ?>
 
-    <div class="row">
-        <div class="col col6of6">
-            <h2>Автоматические</h2>
-        </div>
-    </div>
-
-    <?
-        $index = 0;
-
-        $posts = get_posts(array(
-            'post_type' => 'coffee-dispensers',
-            'post_status' => 'publish',
-            'category_name' => getLangID().'-espresso',
-            'orderby' => 'date',
-            'order' => 'ASC',
-            'numberposts' => -1,
-            'meta_query' => array(
-                array(
-                    'key' => 'espresso_type',
-                    'value' => 'auto',
-                )
-            )
-        ));
-
-        foreach ($posts as $post) : setup_postdata($post); ?>
-
-        <? if ($index % 4 == 0) : ?>
-        <? if ($index > 0) : ?>
-        </div>
-        <? endif; ?>
-        <div class="row product-list<?= $index < count($posts) - 4 ? ' border-curved' : '' ?>">
-        <? endif; ?>
-
-            <div class="col col-1-5of6">
-                <div class="product">
-                    <a href="<? the_permalink() ?>">
-                        <? the_post_thumbnail('dispenser-preview') ?>
-                    </a>
-                    <h3><? the_title() ?></h3>
-                    <p><? the_excerpt() ?></p>
-                    <label><input type="checkbox" data-decs-machineid="<? the_ID(); ?>"/><span></span> <?= langS('Сравнить', 'Compare') ?></label>
-                    <a class="button" href="<? the_permalink() ?>"><?= langS('Подробнее', 'Details') ?><span><span></span></span></a>
-                </div>
-            </div>
-
-    <? 	$index++; endforeach; wp_reset_postdata(); ?>
-
-    <? if ($index > 0) : ?>
-        </div>
-    <? endif; ?>
-
-    <div class="row">
-        <div class="col col6of6">
-            <h2>Профессиональные</h2>
-        </div>
-    </div>
-
-    <?
-        $index = 0;
-
-        $posts = get_posts(array(
-            'post_type' => 'coffee-dispensers',
-            'post_status' => 'publish',
-            'category_name' => getLangID().'-espresso',
-            'orderby' => 'date',
-            'order' => 'ASC',
-            'numberposts' => -1,
-            'meta_query' => array(
-                array(
-                    'key' => 'espresso_type',
-                    'value' => 'prof',
-                )
-            )
-        ));
-
-        foreach ($posts as $post) : setup_postdata($post); ?>
-
-        <? if ($index % 4 == 0) : ?>
-        <? if ($index > 0) : ?>
-        </div>
-        <? endif; ?>
-        <div class="row product-list<?= $index < count($posts) - 4 ? ' border-curved' : '' ?>">
-        <? endif; ?>
-
-            <div class="col col-1-5of6">
-                <div class="product">
-                    <a href="<? the_permalink() ?>">
-                        <? the_post_thumbnail('dispenser-preview') ?>
-                    </a>
-                    <h3><? the_title() ?></h3>
-                    <p><? the_excerpt() ?></p>
-                    <label><input type="checkbox" data-decs-machineid="<? the_ID(); ?>"/><span></span> <?= langS('Сравнить', 'Compare') ?></label>
-                    <a class="button" href="<? the_permalink() ?>"><?= langS('Подробнее', 'Details') ?><span><span></span></span></a>
-                </div>
-            </div>
-
-    <? 	$index++; endforeach; wp_reset_postdata(); ?>
-
-    <? if ($index > 0) : ?>
-        </div>
-    <? endif; ?>
+	<div class="gh-espresso-groups">
+		<?php foreach ( $espresso_groups as $type => $heading ) : ?>
+			<?php
+			$machines = get_posts( [
+				'post_type' => 'coffee-dispensers',
+				'post_status' => 'publish',
+				'category_name' => getLangID() . '-espresso',
+				'orderby' => 'date',
+				'order' => 'ASC',
+				'numberposts' => -1,
+				'meta_key' => 'espresso_type',
+				'meta_value' => $type,
+			] );
+			?>
+			<section class="gh-espresso-group">
+				<h2 class="gh-espresso-heading"><?php echo esc_html( $heading ); ?></h2>
+				<?php if ( $machines ) : ?>
+					<div class="row product-list">
+						<?php foreach ( $machines as $machine ) : ?>
+							<?php
+							$url = get_permalink( $machine );
+							$title = get_the_title( $machine );
+							$thumbnail = get_the_post_thumbnail( $machine, 'full' );
+							$excerpt = get_the_excerpt( $machine );
+							?>
+							<div class="col">
+								<div class="product">
+									<?php if ( $thumbnail ) : ?>
+										<a class="gh-espresso-product-image" href="<?php echo esc_url( $url ); ?>" aria-label="<?php echo esc_attr( $title ); ?>"><?php echo $thumbnail; ?></a>
+									<?php endif; ?>
+									<div class="gh-espresso-product-copy">
+										<h3><?php echo esc_html( $title ); ?></h3>
+										<?php if ( '' !== trim( $excerpt ) ) : ?>
+											<?php echo wp_kses_post( apply_filters( 'the_excerpt', $excerpt ) ); ?>
+										<?php endif; ?>
+									</div>
+									<div class="gh-espresso-product-actions">
+										<label>
+											<input type="checkbox" data-decs-machineid="<?php echo esc_attr( $machine->ID ); ?>">
+											<?php echo esc_html( langS( 'Сравнить', 'Compare' ) ); ?>
+										</label>
+										<a class="button" href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( langS( 'Подробнее', 'Details' ) ); ?></a>
+									</div>
+								</div>
+							</div>
+						<?php endforeach; ?>
+					</div>
+				<?php endif; ?>
+			</section>
+		<?php endforeach; ?>
+	</div>
 </div>
 
 <div class="product-toolbox">
-    <h4><?= langS('Выбранные диспенсеры:', 'Selected coffee machines:') ?></h4>
-    <ul></ul>
-    <a href="<?= makeLangURL('/%/equipment/espresso/compare/') ?>" class="button"><?= langS('Сравнить', 'Compare') ?><span><span></span></span></a>
+	<h4><?php echo esc_html( langS( 'Выбранные диспенсеры:', 'Selected coffee machines:' ) ); ?></h4>
+	<ul></ul>
+	<a href="<?php echo esc_url( makeLangURL( '/%/equipment/espresso/compare/' ) ); ?>" class="button"><?php echo esc_html( langS( 'Сравнить', 'Compare' ) ); ?></a>
 </div>
