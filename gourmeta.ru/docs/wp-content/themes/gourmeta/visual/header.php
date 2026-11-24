@@ -8,6 +8,7 @@ if ( is_front_page() && gourmeta_is_hero_home() ) {
 $is_about_page = is_page() && 'ru/about' === get_page_uri();
 $page_content = is_page() ? get_post_field( 'post_content', get_queried_object_id(), 'raw' ) : '';
 $social_links_in_page = str_contains( $page_content, 'gh-about-social' ) || str_contains( $page_content, 'gh-social-section' );
+$show_social_buttons = ! get_option( 'gourmeta_hide_social_links' ) && ! $social_links_in_page;
 ?>
 <div class="breadcrumb-wrapper<?php echo $is_about_page ? ' gh-about-tools' : ''; ?>">
 	<div class="breadcrumb-container">
@@ -27,13 +28,13 @@ $social_links_in_page = str_contains( $page_content, 'gh-about-social' ) || str_
 				<?php echo esc_html( langS( 'Распечатать страницу', 'Print page' ) ); ?>
 			</button>
 		<?php endif; ?>
-		<?php if ( ! $is_about_page || ! $social_links_in_page ) : ?>
+		<?php if ( ! $is_about_page || $show_social_buttons ) : ?>
 			<div class="addthis_toolbox addthis_default_style">
 				<?php if ( ! $is_about_page ) : ?>
 					<a class="print-btn" href="#" aria-label="<?php echo esc_attr( langS( 'Распечатать страницу', 'Print page' ) ); ?>"
 						data-tiptext="<?php echo esc_attr( langS( 'Распечатать страницу', 'Print page' ) ); ?>"></a>
 				<?php endif; ?>
-				<?php if ( ! $social_links_in_page ) : ?>
+				<?php if ( $show_social_buttons ) : ?>
 					<a class="facebook" href="https://www.facebook.com/gourmeta.ru/" aria-label="Facebook" data-tiptext="Facebook">
 						<img width="16" height="16" src="<?php echo esc_url( content_url( 'uploads/2017/09/facebook-256.png' ) ); ?>" alt="">
 					</a>

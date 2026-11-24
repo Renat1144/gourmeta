@@ -78,6 +78,49 @@ add_filter( 'body_class', static function ( $classes ) {
 	return $classes;
 } );
 
+add_filter( 'wp_nav_menu_objects', static function ( $items ) {
+	$hidden = [];
+	foreach ( $items as $item ) {
+		if ( in_array( 'gh-temporarily-hidden', (array) $item->classes, true ) ) {
+			$hidden[ $item->ID ] = true;
+		}
+	}
+	if ( ! $hidden ) {
+		return $items;
+	}
+	do {
+		$count = count( $hidden );
+		foreach ( $items as $item ) {
+			if ( isset( $hidden[ $item->menu_item_parent ] ) ) {
+				$hidden[ $item->ID ] = true;
+			}
+		}
+	} while ( count( $hidden ) !== $count );
+
+	return array_values( array_filter( $items, static fn( $item ) => ! isset( $hidden[ $item->ID ] ) ) );
+} );
+
+add_action( 'template_redirect', static function () {
+	$equipment_archive = is_category( [ 'ru-cafitesse', 'ru-espresso', 'ru-termo', 'en-cafitesse' ] );
+	$path = wp_parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH );
+	$equipment_404 = is_404() && preg_match( '~^/(?:ru|en)/equipment(?:/|$)~', (string) $path );
+	if ( ! $equipment_archive && ! $equipment_404 ) {
+		return;
+	}
+	$equipment = get_page_by_path( 'ru/equipment' );
+	if ( ! $equipment || 'draft' !== $equipment->post_status ) {
+		return;
+	}
+
+	// Keep old equipment URLs from redirecting to similar coffee product URLs.
+	remove_action( 'template_redirect', 'redirect_canonical' );
+	if ( $equipment_archive ) {
+		$GLOBALS['wp_query']->set_404();
+		status_header( 404 );
+		nocache_headers();
+	}
+}, 9 );
+
 add_action( 'wp_enqueue_scripts', static function () {
 	wp_enqueue_script( 'gourmeta-hero-navigation', get_template_directory_uri() . '/visual/hero.js',
 		[], filemtime( __DIR__ . '/hero.js' ), true );
@@ -186,6 +229,9 @@ function gourmeta_visual_data_image( $source ) {
 
 function gourmeta_render_block( $name, $attributes, $content, $block ) {
 	$html = $attributes['html'] ?? [];
+	if ( in_array( 'gh-temporarily-hidden', preg_split( '/\s+/', (string) ( $html['class'] ?? '' ) ), true ) ) {
+		return '';
+	}
 	$value = $attributes['value'] ?? '';
 	switch ( $name ) {
 		case 'hero':

@@ -27,6 +27,10 @@
 	box-sizing: content-box;
 }
 
+.gourmeta-visual-layout .gh-temporarily-hidden:not(.is-selected, .has-child-selected, :has(.is-selected)) {
+	display: none !important;
+}
+
 .gourmeta-editor-header,
 .gourmeta-editor-footer {
 	position: relative;

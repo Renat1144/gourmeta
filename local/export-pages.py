@@ -86,7 +86,16 @@ def parse_document(data):
 
 def sitemap_pages():
     pages = {"/"}
+    _, _, index = download("/sitemap_index.xml")
+    if not index:
+        raise RuntimeError("Missing WordPress sitemap index")
+    advertised = {
+        urlsplit(entry.findtext("{*}loc", "")).path
+        for entry in ElementTree.fromstring(index)
+    }
     for name in SITEMAPS:
+        if name != "page-sitemap.xml" and "/" + name not in advertised:
+            continue
         _, _, data = download("/" + name)
         if not data:
             raise RuntimeError(f"Missing WordPress sitemap {name}")
