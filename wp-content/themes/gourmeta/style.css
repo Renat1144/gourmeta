@@ -79,4 +79,4 @@ img.alignleft { float: left; margin-right: 20px; }
 .socialbut a:hover{ filter: grayscale(0%);}
 .flyout > ul > li {width:100px;}
 .col-wrapper-grey {background: none !important;}
-.col-box {background: none !important;}
+.col-box {background: none;}

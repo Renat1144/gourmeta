@@ -10,7 +10,7 @@ jQuery.noConflict();
 jQuery(function ($) {
 
 	// print button
-	$('.print-btn').click(function () { window.print(); });
+	$('.print-btn').click(function (event) { event.preventDefault(); window.print(); });
 	//open pdf's in a new window
 	$('.pdf').attr('target', '_blank');
 
@@ -72,9 +72,11 @@ jQuery(function ($) {
 	equalizeHeight('.col-4of6 .faq-teaser li', 2);
 	equalizeHeight('.col-6of6 .faq-teaser li', 3);
 	equalizeHeight('.teasers-related li p');
-	equalizeHeight('.product-list .col', 4);
-	equalizeHeight('.product .product-content-wrapper', 4);
-	equalizeHeight('.product-list .col .product', 4); 
+	if (!$('body').hasClass('gourmeta-inner-page')) {
+		equalizeHeight('.product-list .col', 4);
+		equalizeHeight('.product .product-content-wrapper', 4);
+		equalizeHeight('.product-list .col .product', 4);
+	}
 	equalizeHeight('.teasers-related-three p');
 	equalizeHeight('.compare-machines .col', 3);
 	equalizeHeight('.machine-intro', 3);

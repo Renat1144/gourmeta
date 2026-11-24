@@ -1,4 +1,4 @@
-.gourmeta-hero-home {
+.gourmeta-site {
 	--gh-back-to-top-size: 48px;
 	--gh-back-to-top-end: max(16px, calc(env(safe-area-inset-right, 0px) + 12px));
 }
@@ -40,7 +40,7 @@
 	--gh-hero-fade: linear-gradient(to bottom, transparent, var(--gh-ink) 96%) bottom / 100% clamp(34px, 4.8vw, 72px) no-repeat;
 }
 
-.gourmeta-hero-home .gourmeta-masthead-menu {
+.gourmeta-site .gourmeta-masthead-menu {
 	gap: 3px;
 	padding: 4px;
 	border: 1px solid var(--gh-line-on-light);
@@ -48,7 +48,7 @@
 	background: var(--gh-sand);
 }
 
-.gourmeta-hero-home .gourmeta-masthead-menu > li > a {
+.gourmeta-site .gourmeta-masthead-menu > li > a {
 	display: block;
 	padding: 9px clamp(7px, 1.05vw, 15px);
 	border: 1px solid transparent;
@@ -60,7 +60,7 @@
 	transition: border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
 }
 
-.gourmeta-hero-home .gourmeta-masthead-menu > li:is(:hover, :focus-within, .current-menu-item) > a {
+.gourmeta-site .gourmeta-masthead-menu > li:is(:hover, :focus-within, .current-menu-item) > a {
 	color: var(--gh-ink);
 	border-color: var(--gh-accent);
 	background: var(--gh-accent);
@@ -251,7 +251,7 @@
 	grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
 	padding: clamp(13px, 1.5vw, 22px);
 	border: 1px solid var(--gh-ink-soft);
-	border-radius: 29px 78px 27px 27px;
+	border-radius: clamp(20px, 2.3vw, 28px);
 	background: linear-gradient(130deg, var(--gh-ink-soft), var(--gh-ink) 70%);
 }
 
@@ -319,25 +319,10 @@
 	background: radial-gradient(ellipse at 85% 0%, var(--gh-ink-soft), transparent 69%), var(--gh-ink);
 }
 
-.gh-footer::before {
-	content: "";
-	position: absolute;
-	right: -17%;
-	bottom: 50%;
-	z-index: -1;
-	width: min(70vw, 830px);
-	aspect-ratio: 1.8;
-	border: 1px solid #d5bea53b;
-	border-radius: 50%;
-	box-shadow: 0 0 0 26px #d5bea510, 0 0 0 55px #d5bea509;
-	transform: rotate(-28deg);
-	pointer-events: none;
-}
-
 .gh-footer-main {
 	display: grid;
-	grid-template-columns: minmax(190px, .95fr) minmax(240px, 1.22fr) minmax(230px, .93fr);
-	gap: clamp(20px, 4vw, 66px);
+	grid-template-columns: minmax(0, .85fr) minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1.2fr);
+	gap: clamp(20px, 2.7vw, 44px);
 	padding-bottom: clamp(34px, 4vw, 60px);
 }
 
@@ -547,17 +532,17 @@
 
 .gourmeta-visual-layout .gh-footer .gh-footer-logo { margin: 0; }
 
+@media (max-width: 1100px) {
+	.gh-footer-main { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
 @media (max-width: 975px) {
-	.gourmeta-hero-home .gourmeta-masthead-partner { display: none; }
+	.gourmeta-site .gourmeta-masthead-partner { display: none; }
 }
 
 @media (max-width: 900px) {
-	.gourmeta-hero-home .gourmeta-masthead-menu { padding: 8px; }
-	.gourmeta-hero-home .gourmeta-masthead-menu > li > a { padding: 8px 10px; }
-	.gh-footer-main {
-		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-	}
-	.gh-footer-brand { grid-column: 1 / -1; }
+	.gourmeta-site .gourmeta-masthead-menu { padding: 8px; }
+	.gourmeta-site .gourmeta-masthead-menu > li > a { padding: 8px 10px; }
 }
 
 @media (max-width: 720px) {
@@ -570,7 +555,6 @@
 	.gh-format-heading .gh-paragraph { justify-self: start; }
 	.gh-formats .gh-card, .gh-formats .gh-card-wide { grid-column: span 6; }
 	.gh-support .gh-support-image { min-height: 0; aspect-ratio: 1.6; }
-	.gh-support .gh-support-panel { border-radius: 23px 48px 20px 20px; }
 }
 
 @media (max-width: 500px) {
@@ -579,12 +563,11 @@
 	.gh-support .gh-support-copy { padding: 27px 11px 15px; }
 	.gh-support-list li { grid-template-columns: minmax(0, 1fr); gap: 4px; }
 	.gh-footer-main { grid-template-columns: minmax(0, 1fr); gap: 28px; }
-	.gh-footer-brand { grid-column: auto; }
 	.gh-footer-bottom { flex-direction: column; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-	.gourmeta-hero-home .gourmeta-masthead-menu a,
+	.gourmeta-site .gourmeta-masthead-menu a,
 	.gh-card img,
 	.gh-back-to-top { transition: none; }
 	.gh-card:hover img,
